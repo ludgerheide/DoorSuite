@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E40C81141673EB6F0050491E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81131673EB6F0050491E /* Icon@2x.png */; };
+		E40C81161673EB710050491E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81151673EB710050491E /* Icon.png */; };
+		E40C81181673EB740050491E /* Icon_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81171673EB740050491E /* Icon_iPad@2x.png */; };
+		E40C811A1673EB770050491E /* Icon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81191673EB770050491E /* Icon_iPad.png */; };
+		E40C811C1673EDD10050491E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C811B1673EDD10050491E /* Default.png */; };
+		E40C811E1673EDD80050491E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C811D1673EDD80050491E /* Default@2x.png */; };
+		E40C81201673EDDC0050491E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C811F1673EDDC0050491E /* Default-568h@2x.png */; };
+		E40C81221673EDE60050491E /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81211673EDE60050491E /* Default-Portrait@2x~ipad.png */; };
+		E40C81241673EDEA0050491E /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81231673EDEA0050491E /* Default-Landscape@2x~ipad.png */; };
+		E40C81261673EDED0050491E /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81251673EDED0050491E /* Default-Portrait~ipad.png */; };
+		E40C81281673EDF10050491E /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E40C81271673EDF10050491E /* Default-Landscape~ipad.png */; };
+		E4136AE71671252C00D818AC /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E4136AE61671252C00D818AC /* KeychainWrapper.m */; };
+		E4136AF21671265200D818AC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4136AF11671265200D818AC /* Security.framework */; };
+		E4136AF41671470B00D818AC /* LHRoot.der in Resources */ = {isa = PBXBuildFile; fileRef = E4136AF31671470000D818AC /* LHRoot.der */; };
+		E4DC6A261669DFD4001938E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC6A251669DFD4001938E9 /* UIKit.framework */; };
+		E4DC6A281669DFD4001938E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC6A271669DFD4001938E9 /* Foundation.framework */; };
+		E4DC6A2A1669DFD4001938E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DC6A291669DFD4001938E9 /* CoreGraphics.framework */; };
+		E4DC6A301669DFD4001938E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E4DC6A2E1669DFD4001938E9 /* InfoPlist.strings */; };
+		E4DC6A321669DFD4001938E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC6A311669DFD4001938E9 /* main.m */; };
+		E4DC6A361669DFD4001938E9 /* LHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC6A351669DFD4001938E9 /* LHAppDelegate.m */; };
+		E4DC6A3F1669DFD4001938E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4DC6A3D1669DFD4001938E9 /* MainStoryboard_iPhone.storyboard */; };
+		E4DC6A421669DFD4001938E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4DC6A401669DFD4001938E9 /* MainStoryboard_iPad.storyboard */; };
+		E4DC6A451669DFD4001938E9 /* LHMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC6A441669DFD4001938E9 /* LHMainViewController.m */; };
+		E4DC6A481669DFD4001938E9 /* LHFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DC6A471669DFD4001938E9 /* LHFlipsideViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E40C81131673EB6F0050491E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		E40C81151673EB710050491E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		E40C81171673EB740050491E /* Icon_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon_iPad@2x.png"; path = "../Icon_iPad@2x.png"; sourceTree = "<group>"; };
+		E40C81191673EB770050491E /* Icon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon_iPad.png; path = ../Icon_iPad.png; sourceTree = "<group>"; };
+		E40C811B1673EDD10050491E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		E40C811D1673EDD80050491E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		E40C811F1673EDDC0050491E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		E40C81211673EDE60050491E /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		E40C81231673EDEA0050491E /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		E40C81251673EDED0050491E /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		E40C81271673EDF10050491E /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		E4136AE51671252C00D818AC /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		E4136AE61671252C00D818AC /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		E4136AE91671259000D818AC /* KeychainConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainConstants.h; sourceTree = "<group>"; };
+		E4136AF11671265200D818AC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E4136AF31671470000D818AC /* LHRoot.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = LHRoot.der; sourceTree = "<group>"; };
+		E4DC6A211669DFD4001938E9 /* DoorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DC6A251669DFD4001938E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E4DC6A271669DFD4001938E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E4DC6A291669DFD4001938E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E4DC6A2D1669DFD4001938E9 /* DoorApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DoorApp-Info.plist"; sourceTree = "<group>"; };
+		E4DC6A2F1669DFD4001938E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E4DC6A311669DFD4001938E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E4DC6A331669DFD4001938E9 /* DoorApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoorApp-Prefix.pch"; sourceTree = "<group>"; };
+		E4DC6A341669DFD4001938E9 /* LHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHAppDelegate.h; sourceTree = "<group>"; };
+		E4DC6A351669DFD4001938E9 /* LHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHAppDelegate.m; sourceTree = "<group>"; };
+		E4DC6A3E1669DFD4001938E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		E4DC6A411669DFD4001938E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		E4DC6A431669DFD4001938E9 /* LHMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHMainViewController.h; sourceTree = "<group>"; };
+		E4DC6A441669DFD4001938E9 /* LHMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHMainViewController.m; sourceTree = "<group>"; };
+		E4DC6A461669DFD4001938E9 /* LHFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHFlipsideViewController.h; sourceTree = "<group>"; };
+		E4DC6A471669DFD4001938E9 /* LHFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHFlipsideViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E4DC6A1E1669DFD4001938E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4136AF21671265200D818AC /* Security.framework in Frameworks */,
+				E4DC6A261669DFD4001938E9 /* UIKit.framework in Frameworks */,
+				E4DC6A281669DFD4001938E9 /* Foundation.framework in Frameworks */,
+				E4DC6A2A1669DFD4001938E9 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E4DC6A161669DFD4001938E9 = {
+			isa = PBXGroup;
+			children = (
+				E4DC6A2B1669DFD4001938E9 /* DoorApp */,
+				E4DC6A241669DFD4001938E9 /* Frameworks */,
+				E4DC6A221669DFD4001938E9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E4DC6A221669DFD4001938E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC6A211669DFD4001938E9 /* DoorApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4DC6A241669DFD4001938E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC6A251669DFD4001938E9 /* UIKit.framework */,
+				E4DC6A271669DFD4001938E9 /* Foundation.framework */,
+				E4DC6A291669DFD4001938E9 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4DC6A2B1669DFD4001938E9 /* DoorApp */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC6A341669DFD4001938E9 /* LHAppDelegate.h */,
+				E4DC6A351669DFD4001938E9 /* LHAppDelegate.m */,
+				E4DC6A3D1669DFD4001938E9 /* MainStoryboard_iPhone.storyboard */,
+				E4DC6A401669DFD4001938E9 /* MainStoryboard_iPad.storyboard */,
+				E4DC6A431669DFD4001938E9 /* LHMainViewController.h */,
+				E4DC6A441669DFD4001938E9 /* LHMainViewController.m */,
+				E4136AE91671259000D818AC /* KeychainConstants.h */,
+				E4136AE51671252C00D818AC /* KeychainWrapper.h */,
+				E4136AE61671252C00D818AC /* KeychainWrapper.m */,
+				E4DC6A461669DFD4001938E9 /* LHFlipsideViewController.h */,
+				E4DC6A471669DFD4001938E9 /* LHFlipsideViewController.m */,
+				E4DC6A2C1669DFD4001938E9 /* Supporting Files */,
+			);
+			path = DoorApp;
+			sourceTree = "<group>";
+		};
+		E4DC6A2C1669DFD4001938E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E40C81271673EDF10050491E /* Default-Landscape~ipad.png */,
+				E40C81251673EDED0050491E /* Default-Portrait~ipad.png */,
+				E40C81231673EDEA0050491E /* Default-Landscape@2x~ipad.png */,
+				E40C81211673EDE60050491E /* Default-Portrait@2x~ipad.png */,
+				E40C811F1673EDDC0050491E /* Default-568h@2x.png */,
+				E40C811D1673EDD80050491E /* Default@2x.png */,
+				E40C811B1673EDD10050491E /* Default.png */,
+				E40C81191673EB770050491E /* Icon_iPad.png */,
+				E40C81171673EB740050491E /* Icon_iPad@2x.png */,
+				E40C81151673EB710050491E /* Icon.png */,
+				E40C81131673EB6F0050491E /* Icon@2x.png */,
+				E4136AF31671470000D818AC /* LHRoot.der */,
+				E4136AF11671265200D818AC /* Security.framework */,
+				E4DC6A2D1669DFD4001938E9 /* DoorApp-Info.plist */,
+				E4DC6A2E1669DFD4001938E9 /* InfoPlist.strings */,
+				E4DC6A311669DFD4001938E9 /* main.m */,
+				E4DC6A331669DFD4001938E9 /* DoorApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E4DC6A201669DFD4001938E9 /* DoorApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4DC6A4B1669DFD4001938E9 /* Build configuration list for PBXNativeTarget "DoorApp" */;
+			buildPhases = (
+				E4DC6A1D1669DFD4001938E9 /* Sources */,
+				E4DC6A1E1669DFD4001938E9 /* Frameworks */,
+				E4DC6A1F1669DFD4001938E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoorApp;
+			productName = DoorApp;
+			productReference = E4DC6A211669DFD4001938E9 /* DoorApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E4DC6A181669DFD4001938E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LH;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Ludger Heide";
+			};
+			buildConfigurationList = E4DC6A1B1669DFD4001938E9 /* Build configuration list for PBXProject "DoorApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E4DC6A161669DFD4001938E9;
+			productRefGroup = E4DC6A221669DFD4001938E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E4DC6A201669DFD4001938E9 /* DoorApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E4DC6A1F1669DFD4001938E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4136AF41671470B00D818AC /* LHRoot.der in Resources */,
+				E4DC6A301669DFD4001938E9 /* InfoPlist.strings in Resources */,
+				E4DC6A3F1669DFD4001938E9 /* MainStoryboard_iPhone.storyboard in Resources */,
+				E4DC6A421669DFD4001938E9 /* MainStoryboard_iPad.storyboard in Resources */,
+				E40C81141673EB6F0050491E /* Icon@2x.png in Resources */,
+				E40C81161673EB710050491E /* Icon.png in Resources */,
+				E40C81181673EB740050491E /* Icon_iPad@2x.png in Resources */,
+				E40C811A1673EB770050491E /* Icon_iPad.png in Resources */,
+				E40C811C1673EDD10050491E /* Default.png in Resources */,
+				E40C811E1673EDD80050491E /* Default@2x.png in Resources */,
+				E40C81201673EDDC0050491E /* Default-568h@2x.png in Resources */,
+				E40C81221673EDE60050491E /* Default-Portrait@2x~ipad.png in Resources */,
+				E40C81241673EDEA0050491E /* Default-Landscape@2x~ipad.png in Resources */,
+				E40C81261673EDED0050491E /* Default-Portrait~ipad.png in Resources */,
+				E40C81281673EDF10050491E /* Default-Landscape~ipad.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E4DC6A1D1669DFD4001938E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DC6A321669DFD4001938E9 /* main.m in Sources */,
+				E4DC6A361669DFD4001938E9 /* LHAppDelegate.m in Sources */,
+				E4DC6A451669DFD4001938E9 /* LHMainViewController.m in Sources */,
+				E4DC6A481669DFD4001938E9 /* LHFlipsideViewController.m in Sources */,
+				E4136AE71671252C00D818AC /* KeychainWrapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E4DC6A2E1669DFD4001938E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DC6A2F1669DFD4001938E9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E4DC6A3D1669DFD4001938E9 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DC6A3E1669DFD4001938E9 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		E4DC6A401669DFD4001938E9 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E4DC6A411669DFD4001938E9 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E4DC6A491669DFD4001938E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E4DC6A4A1669DFD4001938E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E4DC6A4C1669DFD4001938E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DoorApp/DoorApp-Prefix.pch";
+				INFOPLIST_FILE = "DoorApp/DoorApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E4DC6A4D1669DFD4001938E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DoorApp/DoorApp-Prefix.pch";
+				INFOPLIST_FILE = "DoorApp/DoorApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E4DC6A1B1669DFD4001938E9 /* Build configuration list for PBXProject "DoorApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DC6A491669DFD4001938E9 /* Debug */,
+				E4DC6A4A1669DFD4001938E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4DC6A4B1669DFD4001938E9 /* Build configuration list for PBXNativeTarget "DoorApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DC6A4C1669DFD4001938E9 /* Debug */,
+				E4DC6A4D1669DFD4001938E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E4DC6A181669DFD4001938E9 /* Project object */;
+}

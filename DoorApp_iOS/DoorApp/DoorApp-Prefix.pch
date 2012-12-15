@@ -1,0 +1,27 @@
+//
+// Prefix header for all source files of the 'DoorApp' target in the 'DoorApp' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#define URLKey @"connectionURL"
+#define AuthOnWLANKey @"AuthOnWLAN"
+#define AuthOnGPSKey @"AuthOnGPS"
+
+#define LHDoorAppSecret @"LHDoorAppSecret"
+#define AUTHTIMEOUT 15;
+
+#define ServerReturnSuccess @"SUCCESS"
+#define ServerReturnInternalFailure @"FAIL"
+#define ServerReturnAuthFailure @"SECRET_INCORRECT"
+#define ServerReturnRegistrationPending @"REGISTRATION_PENDING"
+#define ServerReturnRegistrationStarted @"REGISTRATION_STARTED"
