@@ -12,18 +12,7 @@
 			$action = $_POST["action"];
 			$id = $_POST["id"];
 			
-			//Verbindung mit SQL herstellen
-			/* Datenbankserver - In der Regel die IP */
-			$db_server = 'localhost';
-			/* Datenbankname */
-			$db_name = 'doorApp_db';
-			/* Datenbankuser */
-			$db_user = 'doorApp';
-			/* Datenbankpasswort */
-			$db_passwort = 'OURMNhv32K9IMbMMiRHd';
-			/* Erstellt Connect zu Datenbank her */
-			$db = @ mysql_connect ( $db_server, $db_user, $db_passwort );
-			$db_select = @ mysql_select_db( $db_name );
+			include import.php
 			
 			if($action == "Register" && $id !='') {
 				$update_query="UPDATE devices SET authenticated=1 WHERE id= '$id'";

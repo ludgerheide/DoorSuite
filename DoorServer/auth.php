@@ -7,18 +7,7 @@
 	$deviceName=$_POST["deviceName"];
 	
 	//Get information about the current device from the DB
-	//Verbindung mit SQL herstellen
-	/* Datenbankserver - In der Regel die IP */
-	$db_server = 'localhost';
-	/* Datenbankname */
-	$db_name = 'doorApp_db';
-	/* Datenbankuser */
-	$db_user = 'doorApp';
-	/* Datenbankpasswort */
-	$db_passwort = 'OURMNhv32K9IMbMMiRHd';
-	/* Erstellt Connect zu Datenbank her */
-	$db = @ mysql_connect ( $db_server, $db_user, $db_passwort );
-	$db_select = @ mysql_select_db( $db_name );
+	include import.php
 		
 	//Tabelle auslesen
 	$result = mysql_query ("SELECT * FROM devices WHERE udid=\"" . $udid . "\" ORDER BY id");
