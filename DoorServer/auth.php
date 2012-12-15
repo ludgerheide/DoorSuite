@@ -7,7 +7,7 @@
 	$deviceName=$_POST["deviceName"];
 	
 	//Get information about the current device from the DB
-	include import.php
+	include "import.php";
 		
 	//Tabelle auslesen
 	$result = mysql_query ("SELECT * FROM devices WHERE udid=\"" . $udid . "\" ORDER BY id");
@@ -46,16 +46,20 @@
 			$serial->confStopBits(1);$serial->confFlowControl("none");
 			// Then we need to open it
 			$serial->deviceOpen();// To write into
+			$serial->serialflush ();
 			$serial->sendMessage("a");
 			//Read out the stuff
 			$read = $serial->readPort();
-			
+			//DEBUG
+			//echo $read;
+			// If you want to change the configuration, the device must be closed
+			$serial->deviceClose();	
+
 			if(substr_compare($read, "AuthOn serial", 0 ,13) == 0)
 				$log = "SUCCESS";
 			else
 				$log = "FAIL";
-			// If you want to change the configuration, the device must be closed
-			$serial->deviceClose();	
+				
 		} else if($isRegistered == 0)
 			$log = "REGISTRATION_PENDING";
 		else

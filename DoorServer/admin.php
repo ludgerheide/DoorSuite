@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<?php
-			include import.php
+			include "import.php";
 		
 			//Tabelle auslesen
 			$result = mysql_query ("SELECT `id`,`deviceName`,`authenticated` FROM `devices` ORDER BY authenticated");

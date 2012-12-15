@@ -1,5 +1,5 @@
 <?php
-	include import.php
+	include "import.php";
 	
 	//Tabelle auslesen
 	$result = mysql_query ("SELECT datetime, deviceName, event FROM log INNER JOIN devices ON log.deviceid=devices.id");
@@ -8,10 +8,11 @@
 	$size = mysql_num_rows ( $result );
 	while ( $row = mysql_fetch_row ( $result ) ) {  
 		echo $row[0];
-		echo ": "
+		echo ", ";
 		echo $row[1];
-		echo ", "
+		echo ", ";
 		echo $row[2];
+		echo "\n";
 	}
 
 ?>

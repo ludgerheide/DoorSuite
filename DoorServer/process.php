@@ -12,7 +12,7 @@
 			$action = $_POST["action"];
 			$id = $_POST["id"];
 			
-			include import.php
+			include "import.php";
 			
 			if($action == "Register" && $id !='') {
 				$update_query="UPDATE devices SET authenticated=1 WHERE id= '$id'";
