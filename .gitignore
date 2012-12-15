@@ -4,3 +4,5 @@ DoorApp_Android/out
 DoorApp_iOS/.DS_Store
 
 *.xcuserstate
+
+*.ino~

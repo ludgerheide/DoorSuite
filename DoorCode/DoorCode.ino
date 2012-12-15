@@ -146,9 +146,9 @@ void loop() {
     // get incoming byte:
     inByte = Serial.read();
     if(inByte == 97) {
+      Serial.println("AuthOn serial");
       deauthenticate;
       authenticate();
-      Serial.println("AuthOn serial");
     }
   }
 
