@@ -166,8 +166,9 @@ void loop() {
     Serial.println("isRinging");
     detachInterrupt(IN_BELLPIN - 2);
     if(authenticated == true && openingsRemaining > 0) {
-      buzzerOn();
       gabelOn();
+      delay(GEDENKSEKUNDE);
+      buzzerOn();
     }
     if(openingsRemaining <= 0) {
       deauthenticate;
