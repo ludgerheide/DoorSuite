@@ -49,10 +49,10 @@ void setup() {
 
   pinMode(OUT_BUZZERPIN, OUTPUT);
   digitalWrite(OUT_BUZZERPIN, GROUND_OFF);
-  
+
   pinMode(OUT_GABELPIN, OUTPUT);
   digitalWrite(OUT_GABELPIN, GROUND_OFF);
-  
+
   pinMode(OUT_SILENTPIN, OUTPUT);
   digitalWrite(OUT_SILENTPIN, GROUND_OFF);
 }
@@ -110,11 +110,11 @@ void buzzerOn() {
       t_buzzer.stop(buzzerTimer);
     buzzerTimer = t_buzzer.after(BUZZERTIMEOUT, buzzerOff);
     openingsRemaining -= 1;
-    
+
     //Set cooldown on and start the timer
     cooldownTimer = t_cooldown.after(BUZZERCOOLDOWN, enableBuzzer);
     buzzerOnCooldown = true;
-    
+
     digitalWrite(OUT_BUZZERPIN, GROUND_ON);
     delay(GEDENKSEKUNDE);
     Serial.println("opening");
@@ -157,10 +157,9 @@ void loop() {
     Serial.println("authButton pressed");
     deauthenticate();
     authenticate();
-    isRinging = true;
     authButtonPressed = false;
   }
-  
+
   //If the bell has been tung, we do stuff, the reset its state
   if(isRinging == true) {
     Serial.println("isRinging");
@@ -177,6 +176,7 @@ void loop() {
     isRinging = false;
   }
 }
+
 
 
 
