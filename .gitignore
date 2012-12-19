@@ -6,3 +6,7 @@ DoorApp_iOS/.DS_Store
 *.xcuserstate
 
 *.ino~
+
+DoorServer/serial/.DS_Store
+
+DoorServer/serial/.DS_Store
