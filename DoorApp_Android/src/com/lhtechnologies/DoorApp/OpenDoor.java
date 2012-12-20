@@ -3,39 +3,30 @@ package com.lhtechnologies.DoorApp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.Settings;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.*;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.security.KeyStore;
-import java.util.UUID;
-import java.security.SecureRandom;
-import android.view.inputmethod.EditorInfo;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.HostnameVerifier;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.KeyStore;
+import java.security.SecureRandom;
+import java.util.UUID;
 
 
 public class OpenDoor extends Activity {
@@ -55,7 +46,7 @@ public class OpenDoor extends Activity {
 
     private final Context context = this;
 
-    private static final String SecretKey = "secret" ;
+    private static final String SecretKey = "secret";
     private static final String UDIDKey = "udid";
     private static final String AddressKey = "address";
     private static final String UndefinedUDID = "undefined_udid";
@@ -68,7 +59,7 @@ public class OpenDoor extends Activity {
     private static final String ServerReturnRegistrationStarted = "REGISTRATION_STARTED";
     private static final String ServerReturnClientError = "ERROR";
     private static final String ServerReturnSuccess = "SUCCESS";
-    private static final String ALLOWED_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm";
+    private static final String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
 
     private final static int timeout = 30;
 
@@ -76,7 +67,7 @@ public class OpenDoor extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        tvStatus =  (TextView) findViewById(R.id.tvAuhthenticated);
+        tvStatus = (TextView) findViewById(R.id.tvAuhthenticated);
         tfUrl = (EditText) findViewById(R.id.tfUrl);
         prActivity = (ProgressBar) findViewById(R.id.prActivity);
         buProcess = (Button) findViewById(R.id.buProcess);
@@ -89,22 +80,22 @@ public class OpenDoor extends Activity {
 
         //If the udid is not set,it defaults to undefined_udid
         //We then create a new one and store it
-        if(udid.equals(UndefinedUDID)) {
+        if (udid.equals(UndefinedUDID)) {
             udid = UUID.randomUUID().toString();
             SharedPreferences.Editor editor = app_preferences.edit();
             editor.putString(UDIDKey, udid);
             editor.commit();
         }
 
-        if(secret.equals(UndefinedSecret)) {
+        if (secret.equals(UndefinedSecret)) {
             secret = getRandomString(256);
             SharedPreferences.Editor editor = app_preferences.edit();
             editor.putString(SecretKey, secret);
             editor.commit();
         }
 
-        if(address.equals(UndefinedAddress)) {
-            address = "http://192.168.15.12/";
+        if (address.equals(UndefinedAddress)) {
+            address = "http://lht2.no-ip.biz/auth.php";
             SharedPreferences.Editor editor = app_preferences.edit();
             editor.putString(AddressKey, address);
             editor.commit();
@@ -166,11 +157,10 @@ public class OpenDoor extends Activity {
         buAbort.setVisibility(View.INVISIBLE);
     }
 
-    private static String getRandomString(final int sizeOfRandomString)
-    {
-        final SecureRandom random=new SecureRandom();
-        final StringBuilder sb=new StringBuilder();
-        for(int i=0;i<sizeOfRandomString;++i)
+    private static String getRandomString(final int sizeOfRandomString) {
+        final SecureRandom random = new SecureRandom();
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < sizeOfRandomString; ++i)
             sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
         return sb.toString();
     }
@@ -214,10 +204,10 @@ public class OpenDoor extends Activity {
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
                 //Read the answer
-                String decodedString = "";
+                String decodedString;
                 String returnString = "";
                 while ((decodedString = in.readLine()) != null) {
-                    returnString +=decodedString;
+                    returnString += decodedString;
                 }
                 in.close();
 
@@ -225,8 +215,8 @@ public class OpenDoor extends Activity {
                 urlConnection = null;
                 url = null;
                 return returnString;
-            } catch(Exception e) {
-                if(urlConnection != null)
+            } catch (Exception e) {
+                if (urlConnection != null)
                     urlConnection.disconnect();
                 urlConnection = null;
                 url = null;
@@ -236,7 +226,7 @@ public class OpenDoor extends Activity {
         }
 
         protected void onPostExecute(String result) {
-            if(result.equals(ServerReturnSuccess)) {
+            if (result.equals(ServerReturnSuccess)) {
                 //Start the timer
                 authCountdown = new CountDownTimer(timeout * 1000, 1000) {
 
@@ -255,15 +245,15 @@ public class OpenDoor extends Activity {
                 buAbort.setVisibility(View.INVISIBLE);
             } else {
                 String reason;
-                if(result.equals(ServerReturnAuthFailure))
+                if (result.equals(ServerReturnAuthFailure))
                     reason = "The server reported an authentication failure. Please contact the administrator";
-                else if(result.equals(ServerReturnInternalFailure))
+                else if (result.equals(ServerReturnInternalFailure))
                     reason = "The server reported an internal failure. Please contact the administrator";
-                else if(result.equals(ServerReturnRegistrationStarted))
+                else if (result.equals(ServerReturnRegistrationStarted))
                     reason = "Your device has been registered and is pending confirmation. If this is not the first time you see this alert, please contact the administrator";
-                else if(result.equals(ServerReturnRegistrationPending))
+                else if (result.equals(ServerReturnRegistrationPending))
                     reason = "Your device is still pending confirmation. Please contact the administrator";
-                else if(result.equals(ServerReturnClientError))
+                else if (result.equals(ServerReturnClientError))
                     reason = "The client reported an error establishing the connection. Please contact the administrator";
                 else
                     reason = "Unknown failure. Please contact the administrator";
