@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DoorApp</string>
+
+    <!-- GUI !-->
+    <string name="defaultURL">https://lht2.no-ip.biz/auth.php</string>
+    <string name="authButton_title">Authentifizieren</string>
+    <string name="StatusNotAuthenticated">"Status: Nicht Authentifizirt"</string>
+    <string name="StatusAuthenticating">Status: Verbinden…</string>
+    <string name="StatusAuthenticated">Status: Authentifiziert</string>
+    <string name="AbortButtonTitle">Abbbrechen</string>
+
+    <!-- OpenDoor.java strings !-->
+    <string name="MalformedURLTitle">Falscher URL!</string>
+    <string name="MalformedURLExplanantion">Die von Ihnen eingegebene Adresse ist nicht kirrekt! Überprüfen Sie ihre Eigabe und versuchen Die es noch einmal!</string>
+    <string name="OKButtonTitle">OK</string>
+
+    <string name="AuthenticationFailedTitle">Authentifizierung fehlgeschlagen!</string>
+
+    <string name="InternalFailureExplanantion">Der Server meldete einen internen Fehler. Bitte kontaktieren Sie den Administrator.</string>
+    <string name="AuthFailureExplanantion">Der Server meldete einen Fehler bei der authentifizierung.  Bitte kontaktieren Sie den Administrator.</string>
+    <string name="RegistrationPendingExplanantion">Ihr Gerät wurde noch nicht bestätigt. Bitte kontaktieren Sie den Administrator.</string>
+    <string name="RegistrationStartedExplanantion">Ihr Gerät wurde erfolgreich angemeldet und muss noch vom Administrator bestätigt werden.</string>
+    <string name="ClientErrorExplanantion">Der Client meldete einen Fehler beim Herstellen der Verbindung. Bitte überprüfen Sie die Adresse und ihre Internetverbindung.</string>
+    <string name="UnknownErrorExplanation">Unbekannter Fehler.  Bitte kontaktieren Sie den Administrator.</string>
+</resources>

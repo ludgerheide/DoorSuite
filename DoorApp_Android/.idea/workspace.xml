@@ -29,7 +29,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" name="Default" comment="Automatic optimization + playing around with IntelliJ's git support">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values-de/strings.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values-en/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/OpenDoor.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/OpenDoor.java" />
@@ -46,7 +45,7 @@
     <file path="/fragment.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356014831062" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1354968542401" ignored="false" />
     <file path="/AuthenticationHandlerTask.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1354971140057" ignored="false" />
-    <file path="/Dummy.txt" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356015067250" ignored="false" />
+    <file path="/Dummy.txt" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356015503403" ignored="false" />
     <file path="/a.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356011085397" ignored="false" />
     <file path="/strings.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356014333851" ignored="false" />
     <file path="/main.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356013748486" ignored="false" />
@@ -507,7 +506,11 @@
       <created>1356010929858</created>
       <updated>1356010929858</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="New project files">
+      <created>1356015487133</created>
+      <updated>1356015487133</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -578,7 +581,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Automatic optimization + playing around with IntelliJ's git support" />
+    <option name="LAST_COMMIT_MESSAGE" value="New project files" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -592,6 +595,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Automatic optimization + playing around with IntelliJ's git support" />
+    <MESSAGE value="New project files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

@@ -31,14 +31,13 @@ import java.util.UUID;
 
 public class OpenDoor extends Activity {
     //Instance variables
-    public TextView tvStatus;
-    public EditText tfUrl;
-    public ProgressBar prActivity;
-    public Button buProcess;
-    public Button buAbort;
+    private TextView tvStatus;
+    private EditText tfUrl;
+    private ProgressBar prActivity;
+    private Button buProcess;
+    private Button buAbort;
 
-    public CountDownTimer authCountdown;
-    public AuthenticationHandlerTask task;
+    private AuthenticationHandlerTask task;
 
     private String udid;
     private String secret;
@@ -95,7 +94,7 @@ public class OpenDoor extends Activity {
         }
 
         if (address.equals(UndefinedAddress)) {
-            address = "http://lht2.no-ip.biz/auth.php";
+            address = getString(R.string.defaultURL);
             SharedPreferences.Editor editor = app_preferences.edit();
             editor.putString(AddressKey, address);
             editor.commit();
@@ -117,7 +116,7 @@ public class OpenDoor extends Activity {
     public void process(View view) {
         //Set the UI to indicate Progress
         prActivity.setVisibility(View.VISIBLE);
-        tvStatus.setText("Status: Connecting");
+        tvStatus.setText(getString(R.string.StatusAuthenticating));
         tvStatus.setTextColor(Color.YELLOW);
         buProcess.setEnabled(false);
         buAbort.setVisibility(View.VISIBLE);
@@ -132,9 +131,9 @@ public class OpenDoor extends Activity {
         } catch (MalformedURLException e) {
             AlertDialog.Builder malformedUrlAlertBuilder = new AlertDialog.Builder(context);
 
-            malformedUrlAlertBuilder.setTitle("Malformed URL!");
-            malformedUrlAlertBuilder.setMessage("The URL you entered is invalid! Please check the URL and try again!");
-            malformedUrlAlertBuilder.setNeutralButton("OK", null);
+            malformedUrlAlertBuilder.setTitle(getString(R.string.MalformedURLTitle));
+            malformedUrlAlertBuilder.setMessage(getString(R.string.MalformedURLExplanantion));
+            malformedUrlAlertBuilder.setNeutralButton(getString(R.string.OKButtonTitle), null);
 
             // create alert dialog
             AlertDialog alertDialog = malformedUrlAlertBuilder.create();
@@ -149,9 +148,9 @@ public class OpenDoor extends Activity {
         resetUI();
     }
 
-    public void resetUI() {
+    void resetUI() {
         prActivity.setVisibility(View.INVISIBLE);
-        tvStatus.setText("Status: Not authenticated");
+        tvStatus.setText(getString(R.string.StatusNotAuthenticated));
         tvStatus.setTextColor(Color.RED);
         buProcess.setEnabled(true);
         buAbort.setVisibility(View.INVISIBLE);
@@ -166,11 +165,11 @@ public class OpenDoor extends Activity {
     }
 
     //Inner class for AsyncTask
-    class AuthenticationHandlerTask extends AsyncTask<URL, Void, String> {
+    class AuthenticationHandlerTask extends AsyncTask<URL, Void, String[]> {
         HttpsURLConnection urlConnection;
         URL url;
 
-        protected String doInBackground(URL... params) {
+        protected String[] doInBackground(URL... params) {
             try {
                 url = params[0];
 
@@ -214,24 +213,28 @@ public class OpenDoor extends Activity {
                 urlConnection.disconnect();
                 urlConnection = null;
                 url = null;
-                return returnString;
+
+                String[] result = {returnString, null};
+                return result;
             } catch (Exception e) {
                 if (urlConnection != null)
                     urlConnection.disconnect();
                 urlConnection = null;
                 url = null;
-                e.printStackTrace();
-                return "ERROR";
+                String[] result = {ServerReturnClientError, e.getLocalizedMessage()};
+                return result;
             }
         }
 
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String[] returnCodes) {
+            String result = returnCodes[0];
+
             if (result.equals(ServerReturnSuccess)) {
                 //Start the timer
-                authCountdown = new CountDownTimer(timeout * 1000, 1000) {
+                CountDownTimer authCountdown = new CountDownTimer(timeout * 1000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
-                        tvStatus.setText("Status: Authenticated - " + millisUntilFinished / 1000);
+                        tvStatus.setText(getString(R.string.StatusAuthenticated) + " – " + millisUntilFinished / 1000);
                     }
 
                     public void onFinish() {
@@ -246,24 +249,24 @@ public class OpenDoor extends Activity {
             } else {
                 String reason;
                 if (result.equals(ServerReturnAuthFailure))
-                    reason = "The server reported an authentication failure. Please contact the administrator";
+                    reason = getString(R.string.AuthFailureExplanantion);
                 else if (result.equals(ServerReturnInternalFailure))
-                    reason = "The server reported an internal failure. Please contact the administrator";
+                    reason = getString(R.string.InternalFailureExplanantion);
                 else if (result.equals(ServerReturnRegistrationStarted))
-                    reason = "Your device has been registered and is pending confirmation. If this is not the first time you see this alert, please contact the administrator";
+                    reason = getString(R.string.RegistrationStartedExplanantion);
                 else if (result.equals(ServerReturnRegistrationPending))
-                    reason = "Your device is still pending confirmation. Please contact the administrator";
+                    reason = getString(R.string.RegistrationPendingExplanantion);
                 else if (result.equals(ServerReturnClientError))
-                    reason = "The client reported an error establishing the connection. Please contact the administrator";
+                    reason = getString(R.string.ClientErrorExplanantion) + "\n" + returnCodes[1];
                 else
-                    reason = "Unknown failure. Please contact the administrator";
+                    reason = getString(R.string.UnknownErrorExplanation);
 
                 //Create an alert and show it
                 AlertDialog.Builder errorAlertBuilder = new AlertDialog.Builder(context);
 
-                errorAlertBuilder.setTitle("Authentication Failed!");
+                errorAlertBuilder.setTitle(getString(R.string.AuthenticationFailedTitle));
                 errorAlertBuilder.setMessage(reason);
-                errorAlertBuilder.setNeutralButton("OK", null);
+                errorAlertBuilder.setNeutralButton(getString(R.string.OKButtonTitle), null);
 
                 // create alert dialog
                 AlertDialog alertDialog = errorAlertBuilder.create();

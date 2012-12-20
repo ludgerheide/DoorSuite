@@ -7,15 +7,15 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="196dp"
-            android:text="Authenticate"
+            android:text="@string/authButton_title"
             android:id="@+id/buProcess" android:layout_gravity="left|center_vertical" android:onClick="process"
             android:textSize="30dp" android:enabled="true"/>
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Status: Not authenticated"
-            android:id="@+id/tvAuhthenticated" android:layout_gravity="left|center_vertical" android:password="false"
-            android:gravity="center" android:textSize="25dp" android:textColor="#ff0000" android:phoneNumber="true"/>
+            android:text="@string/StatusNotAuthenticated"
+            android:id="@+id/tvAuhthenticated" android:layout_gravity="left|center_vertical"
+            android:gravity="center" android:textSize="25dp" android:textColor="#ff0000"/>
     <ProgressBar
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
+        <!--suppress AndroidLintHardcodedText -->
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,14 +34,15 @@
         <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="https://lht2.no-ip.biz/auth.php"
+                android:text="@string/defaultURL"
                 android:id="@+id/tfUrl" android:layout_gravity="center_horizontal|top" android:editable="true"
-                android:maxLines="1" android:singleLine="true"/>
+                android:maxLines="1" android:singleLine="true"
+                android:inputType="textUri"/>
     </LinearLayout>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Abort"
+            android:text="@string/AbortButtonTitle"
             android:id="@+id/buAbort" android:layout_gravity="center" android:enabled="true"
             android:visibility="invisible" android:onClick="abort"/>
 </LinearLayout>
