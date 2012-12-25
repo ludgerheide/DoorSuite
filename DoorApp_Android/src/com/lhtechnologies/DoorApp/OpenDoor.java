@@ -1,8 +1,9 @@
 package com.lhtechnologies.DoorApp;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.*;
+import android.app.Notification.Builder;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -43,7 +44,11 @@ public class OpenDoor extends Activity {
     private String secret;
     private String address;
 
-    private final Context context = this;
+    private final Context mContext = this;
+    private NotificationManager mNotificationManager;
+    private static final int SuccessNotificationId = 1;
+    private static final int FailureNotificationId = 2;
+    private boolean inBackgound = false;
 
     private static final String SecretKey = "secret";
     private static final String UDIDKey = "udid";
@@ -64,7 +69,6 @@ public class OpenDoor extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         tvStatus = (TextView) findViewById(R.id.tvAuhthenticated);
         tfUrl = (EditText) findViewById(R.id.tfUrl);
@@ -72,7 +76,9 @@ public class OpenDoor extends Activity {
         buProcess = (Button) findViewById(R.id.buProcess);
         buAbort = (Button) findViewById(R.id.buAbort);
 
-        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         udid = app_preferences.getString(UDIDKey, UndefinedUDID);
         secret = app_preferences.getString(SecretKey, UndefinedSecret);
         address = app_preferences.getString(AddressKey, UndefinedAddress);
@@ -101,16 +107,27 @@ public class OpenDoor extends Activity {
         }
 
         tfUrl.setText(address);
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onPause() {
+        inBackgound = true;
+
         address = tfUrl.getText().toString();
-        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = app_preferences.edit();
         editor.putString(AddressKey, address);
         editor.commit();
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        mNotificationManager.cancel(FailureNotificationId);
+        inBackgound = false;
+        super.onResume();
     }
 
     public void process(View view) {
@@ -129,7 +146,7 @@ public class OpenDoor extends Activity {
             task = new AuthenticationHandlerTask();
             task.execute(urls);
         } catch (MalformedURLException e) {
-            AlertDialog.Builder malformedUrlAlertBuilder = new AlertDialog.Builder(context);
+            AlertDialog.Builder malformedUrlAlertBuilder = new AlertDialog.Builder(mContext);
 
             malformedUrlAlertBuilder.setTitle(getString(R.string.MalformedURLTitle));
             malformedUrlAlertBuilder.setMessage(getString(R.string.MalformedURLExplanantion));
@@ -154,6 +171,7 @@ public class OpenDoor extends Activity {
         tvStatus.setTextColor(Color.RED);
         buProcess.setEnabled(true);
         buAbort.setVisibility(View.INVISIBLE);
+        mNotificationManager.cancel(SuccessNotificationId);
     }
 
     private static String getRandomString(final int sizeOfRandomString) {
@@ -242,6 +260,17 @@ public class OpenDoor extends Activity {
                 prActivity.setVisibility(View.INVISIBLE);
                 tvStatus.setTextColor(Color.GREEN);
                 buAbort.setVisibility(View.INVISIBLE);
+
+                //Set the notification
+                Builder authNotiBuilder = new Builder(mContext)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.StatusAuthenticated))
+                        .setOngoing(true)
+                        .setDefaults(Notification.FLAG_SHOW_LIGHTS)
+                        .setLights(0xFF00FF00, 1000, 1000);
+                mNotificationManager.notify(SuccessNotificationId, authNotiBuilder.build());
+
             } else {
                 String reason;
                 if (result.equals(ServerReturnAuthFailure))
@@ -258,7 +287,7 @@ public class OpenDoor extends Activity {
                     reason = getString(R.string.UnknownErrorExplanation);
 
                 //Create an alert and show it
-                AlertDialog.Builder errorAlertBuilder = new AlertDialog.Builder(context);
+                AlertDialog.Builder errorAlertBuilder = new AlertDialog.Builder(mContext);
 
                 errorAlertBuilder.setTitle(getString(R.string.AuthenticationFailedTitle));
                 errorAlertBuilder.setMessage(reason);
@@ -269,6 +298,38 @@ public class OpenDoor extends Activity {
 
                 // show it
                 alertDialog.show();
+
+                if (inBackgound) {
+                    //Create a failure notification
+                    Builder failNotiBuilder = new Builder(mContext)
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setContentTitle(getString(R.string.app_name))
+                            .setContentText(reason)
+                            .setOngoing(false)
+                            .setDefaults(Notification.FLAG_SHOW_LIGHTS | Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                            .setLights(0xFFFF0000, 500, 500);
+
+                    // Creates an explicit intent for an Activity in your app
+                    Intent resultIntent = new Intent(mContext, OpenDoor.class);
+
+                    // The stack builder object will contain an artificial back stack for the
+                    // started Activity.
+                    // This ensures that navigating backward from the Activity leads out of
+                    // your application to the Home screen.
+                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
+                    // Adds the back stack for the Intent (but not the Intent itself)
+                    stackBuilder.addParentStack(OpenDoor.class);
+                    // Adds the Intent that starts the Activity to the top of the stack
+                    stackBuilder.addNextIntent(resultIntent);
+                    PendingIntent resultPendingIntent =
+                            stackBuilder.getPendingIntent(
+                                    0,
+                                    PendingIntent.FLAG_UPDATE_CURRENT
+                            );
+                    failNotiBuilder.setContentIntent(resultPendingIntent);
+
+                    mNotificationManager.notify(FailureNotificationId, failNotiBuilder.build());
+                }
 
                 //reset the UI
                 resetUI();
