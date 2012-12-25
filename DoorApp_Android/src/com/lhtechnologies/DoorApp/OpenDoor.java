@@ -173,9 +173,9 @@ public class OpenDoor extends Activity {
             try {
                 url = params[0];
 
-                String password = "moosemoose";
+                String password = "password";
                 KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-                keyStore.load(getResources().getAssets().open("keystore.jks"), password.toCharArray());
+                keyStore.load(getResources().getAssets().open("LH Technologies Root CA.bks"), password.toCharArray());
 
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance("X509");
                 tmf.init(keyStore);
@@ -210,19 +210,15 @@ public class OpenDoor extends Activity {
                 }
                 in.close();
 
-                urlConnection.disconnect();
-                urlConnection = null;
-                url = null;
-
-                String[] result = {returnString, null};
-                return result;
+                return new String[]{returnString, null};
             } catch (Exception e) {
+                String[] result = {ServerReturnClientError, e.getLocalizedMessage()};
+                return result;
+            } finally {
                 if (urlConnection != null)
                     urlConnection.disconnect();
                 urlConnection = null;
                 url = null;
-                String[] result = {ServerReturnClientError, e.getLocalizedMessage()};
-                return result;
             }
         }
 
