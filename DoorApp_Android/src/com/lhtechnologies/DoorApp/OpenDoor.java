@@ -1,7 +1,6 @@
 package com.lhtechnologies.DoorApp;
 
 import android.app.*;
-import android.app.Notification.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -262,13 +263,14 @@ public class OpenDoor extends Activity {
                 buAbort.setVisibility(View.INVISIBLE);
 
                 //Set the notification
-                Builder authNotiBuilder = new Builder(mContext)
+                NotificationCompat.Builder authNotiBuilder = new NotificationCompat.Builder(mContext)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(getString(R.string.StatusAuthenticated))
                         .setOngoing(true)
                         .setDefaults(Notification.FLAG_SHOW_LIGHTS)
                         .setLights(0xFF00FF00, 1000, 1000);
+
                 mNotificationManager.notify(SuccessNotificationId, authNotiBuilder.build());
 
             } else {
@@ -301,7 +303,7 @@ public class OpenDoor extends Activity {
 
                 if (inBackgound) {
                     //Create a failure notification
-                    Builder failNotiBuilder = new Builder(mContext)
+                    NotificationCompat.Builder failNotiBuilder = new NotificationCompat.Builder(mContext)
                             .setSmallIcon(R.drawable.ic_launcher)
                             .setContentTitle(getString(R.string.app_name))
                             .setContentText(reason)
