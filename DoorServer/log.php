@@ -2,7 +2,7 @@
 	include "import.php";
 	
 	//Tabelle auslesen
-	$result = mysql_query ("SELECT datetime, deviceName, event FROM log INNER JOIN devices ON log.deviceid=devices.id");
+	$result = mysql_query ("SELECT datetime, deviceName, event FROM log INNER JOIN devices ON log.deviceid=devices.id ORDER BY datetime");
 	if (!$result)
 		echo 'Abfrage konnte nicht ausgeführt werden: ' . mysql_error();
 	$size = mysql_num_rows ( $result );
