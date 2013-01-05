@@ -3,6 +3,7 @@
     <string name="app_name">DoorApp</string>
 
     <!-- GUI !-->
+    <string name="AbortButtonTitle">Abbrechen</string>
     <string name="authButton_title">Authentifizieren</string>
     <string name="StatusNotAuthenticated">"Status: Nicht Authentifiziert"</string>
     <string name="StatusAuthenticating">Status: Verbinden…</string>
@@ -10,12 +11,14 @@
 
     <!-- Setup screen !-->
     <string name="ScreenTitle">Setup</string>
-    <string name="NoCredentials">Ich habe einen Code erhalten</string>
-    <string name="Credentials">Ich habe keinen Code erhalten</string>
+    <string name="NoCredentials">Ich habe keinen Code erhalten</string>
+    <string name="Credentials">Ich habe einen Code erhalten</string>
     <string name="Continue">Weiter</string>
     <string name="CredentialFieldLabel">Bitte geben Sie hier Ihren Code ein:</string>
     <string name="tfUrlTitle">URL des Servers:</string>
     <string name="defaultURL">https://lht2.no-ip.biz/auth.php</string>
+    <string name="InvalidTextTitle">Inkorrekter Text!</string>
+    <string name="InvalidTextExplanantion">Bitte geben Sie einen korrekten gerätenamen oder Code an!</string>
 
     <!-- MainActivity.java strings !-->
     <string name="OKButtonTitle">OK</string>

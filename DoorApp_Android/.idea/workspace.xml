@@ -24,15 +24,18 @@
       </GlobalState>
     </option>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" name="Default" comment="Bugfixes for legacy devices">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/setup.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/OpenDoor.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java" />
+    <list default="true" id="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" name="Default" comment="Refactoring, added setup activity">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticatorService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java" afterPath="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/setup.xml" afterPath="$PROJECT_DIR$/res/layout/setup.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-de/strings.xml" afterPath="$PROJECT_DIR$/res/values-de/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values-en/strings.xml" afterPath="$PROJECT_DIR$/res/values-en/strings.xml" />
@@ -44,20 +47,21 @@
     <file path="/OpenDoor.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357402509862" ignored="false" />
     <file path="/AuthenticateAtServer.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1354967535045" ignored="false" />
     <file path="/AuthenticationHandler.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1354968684092" ignored="false" />
-    <file path="/fragment.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356014831062" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357404376787" ignored="false" />
+    <file path="/fragment.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357421979164" ignored="false" />
+    <file path="/AndroidManifest.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357419845557" ignored="false" />
     <file path="/AuthenticationHandlerTask.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1354971140057" ignored="false" />
-    <file path="/Dummy.txt" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418634789" ignored="false" />
+    <file path="/Dummy.txt" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357426545306" ignored="false" />
     <file path="/a.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356011085397" ignored="false" />
-    <file path="/strings.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418731718" ignored="false" />
+    <file path="/strings.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357424598338" ignored="false" />
     <file path="/main.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1356013748486" ignored="false" />
-    <file path="/Setup.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357419123536" ignored="false" />
-    <file path="/Authenticator.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418319573" ignored="false" />
-    <file path="/MainActivity.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418365268" ignored="false" />
+    <file path="/Setup.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357426414759" ignored="false" />
+    <file path="/Authenticator.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357421904324" ignored="false" />
+    <file path="/MainActivity.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357425829298" ignored="false" />
     <file path="/CommonStrings.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357409826094" ignored="false" />
     <file path="$PROJECT_DIR$/../../SDKs/adt-bundle-linux/sdk/tools/ant/build.xml" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357412397110" ignored="false" />
-    <file path="/CommonStuff.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418304428" ignored="false" />
+    <file path="/CommonStuff.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357425645409" ignored="false" />
     <file path="/a.dummy" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357418679154" ignored="false" />
+    <file path="/AuthenticatorService.java" changelist="21045bb5-0bae-4cf0-a52a-c2c9cfae5a91" time="1357426048089" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +111,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java" line="69" class="com.lhtechnologies.DoorApp.Setup" package="com.lhtechnologies.DoorApp">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticatorService.java" line="56" class="com.lhtechnologies.DoorApp.AuthenticatorService" package="com.lhtechnologies.DoorApp">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -132,21 +136,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Setup.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Setup.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="0" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.3026316">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="158" column="24" selection-start="5756" selection-end="5756" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Authenticator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="0" selection-start="3056" selection-end="3056" vertical-scroll-proportion="0.0">
+            <state line="107" column="35" selection-start="3909" selection-end="3909" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,13 +156,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/setup.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state line="48" column="4" selection-start="1746" selection-end="1746" vertical-scroll-proportion="0.0">
+      <file leaf-file-name="AuthenticatorService.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticatorService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="19" selection-start="2447" selection-end="2447" vertical-scroll-proportion="0.13596492">
               <folding />
             </state>
           </provider>
@@ -199,17 +198,18 @@
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticationHandler.java" />
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticationHandlerTask.java" />
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/OpenDoor.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStrings.java" />
+        <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/values-de/strings.xml" />
+        <option value="$PROJECT_DIR$/res/values-en/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java" />
-        <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/res/values-en/strings.xml" />
-        <option value="$PROJECT_DIR$/res/values-de/strings.xml" />
-        <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java" />
         <option value="$PROJECT_DIR$/res/layout/setup.xml" />
         <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java" />
+        <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticatorService.java" />
       </list>
     </option>
   </component>
@@ -742,7 +742,11 @@
       <created>1356015487133</created>
       <updated>1356015487133</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="BROKEN">
+      <created>1357419400840</created>
+      <updated>1357419400840</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -783,10 +787,10 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25428414" sideWeight="0.32672334" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25428414" sideWeight="0.23557237" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25428414" sideWeight="0.6717124" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25428414" sideWeight="0.6121097" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282876" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.57048094" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -833,7 +837,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes for legacy devices" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring, added setup activity" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -849,6 +853,8 @@
     <MESSAGE value="Automatic optimization + playing around with IntelliJ's git support" />
     <MESSAGE value="New project files" />
     <MESSAGE value="Bugfixes for legacy devices" />
+    <MESSAGE value="BROKEN" />
+    <MESSAGE value="Refactoring, added setup activity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -858,28 +864,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="19" column="46" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="545" selection-end="545" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../SDKs/adt-bundle-linux/sdk/platforms/android-4.2/android.jar!/android/content/ContextWrapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="28" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../SDKs/adt-bundle-linux/sdk/platforms/android-4.2/android.jar!/android/content/ComponentName.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="11" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" />
@@ -900,22 +884,6 @@
         <state line="37" column="19" selection-start="1621" selection-end="1621" vertical-scroll-proportion="0.30059522" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="70" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="151" selection-start="2434" selection-end="2434" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gen/com/lhtechnologies/DoorApp/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="19" selection-start="145" selection-end="145" vertical-scroll-proportion="0.072463766">
@@ -923,23 +891,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="25" selection-start="0" selection-end="2333" vertical-scroll-proportion="0.625">
+        <state line="3" column="32" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-de/strings.xml">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="70" selection-start="2401" selection-end="2401" vertical-scroll-proportion="0.74452555">
+        <state line="4" column="50" selection-start="114" selection-end="165" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values-en/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="2333" selection-end="2333" vertical-scroll-proportion="0.8035714">
+        <state line="5" column="50" selection-start="165" selection-end="165" vertical-scroll-proportion="0.10964912">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-de/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="45" selection-start="160" selection-end="160" vertical-scroll-proportion="0.10964912">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/CommonStuff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="52" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../SDKs/adt-bundle-linux/sdk/platforms/android-4.2/android.jar!/android/app/IntentService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -954,21 +953,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Authenticator.java">
+    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="0" selection-start="3056" selection-end="3056" vertical-scroll-proportion="0.0">
+        <state line="158" column="24" selection-start="5756" selection-end="5756" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="35" selection-start="3909" selection-end="3909" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/Setup.java">
+    <entry file="file://$PROJECT_DIR$/src/com/lhtechnologies/DoorApp/AuthenticatorService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="2443" selection-end="2443" vertical-scroll-proportion="0.3026316">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="70" column="19" selection-start="2447" selection-end="2447" vertical-scroll-proportion="0.13596492">
+          <folding />
         </state>
       </provider>
     </entry>

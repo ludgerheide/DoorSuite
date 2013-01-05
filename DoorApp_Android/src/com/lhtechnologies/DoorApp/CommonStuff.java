@@ -24,4 +24,7 @@ public final class CommonStuff {
 
     static final String AuthenticatorReturnCode = "AuthRetCod";
     static final String AuthenticatorErrorDescription = "ErrDesc";
+    static final String AuthenticationFinishedBroadCast = "AUTHFIN";
+    static final String stopAction = "STOP";
+    static final String authenticateAction = "AUTH";
 }

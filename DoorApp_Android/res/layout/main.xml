@@ -33,5 +33,14 @@
             android:indeterminateOnly="true"
             android:visibility="invisible"/>
 
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/AbortButtonTitle"
+            android:id="@+id/buAbort"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:onClick="abort"/>
+
 </LinearLayout>
 
