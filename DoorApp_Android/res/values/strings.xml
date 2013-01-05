@@ -3,24 +3,45 @@
     <string name="app_name">DoorApp</string>
 
     <!-- GUI !-->
-    <string name="defaultURL">https://lht2.no-ip.biz/auth.php</string>
     <string name="authButton_title">Authenticate</string>
     <string name="StatusNotAuthenticated">"Status: Not Authenticated"</string>
     <string name="StatusAuthenticating">Status: Connecting</string>
     <string name="StatusAuthenticated">Status: Authenticated</string>
-    <string name="AbortButtonTitle">Abort</string>
 
-    <!-- OpenDoor.java strings !-->
-    <string name="MalformedURLTitle">Malformed URL!</string>
-    <string name="MalformedURLExplanantion">The URL you entered is invalid! Please check the URL and try again!</string>
+    <!-- Setup screen !-->
+    <string name="ScreenTitle">Initial setup</string>
+    <string name="NoCredentials">I have not received a code</string>
+    <string name="Credentials">I have received a code</string>
+    <string name="Continue">Continue</string>
+    <string name="CredentialFieldLabel">Please enter your code here:</string>
+    <string name="tfUrlTitle">URL of the server:</string>
+    <string name="defaultURL">https://lht2.no-ip.biz/auth.php</string>
+
+    <!-- MainActivity.java strings !-->
     <string name="OKButtonTitle">OK</string>
 
     <string name="AuthenticationFailedTitle">Authentication Failed!</string>
+    <string name="RegistrationStartedTitle">Registration started!</string>
+    <string name="RegistrationFailedTitle">Registration Failed!</string>
+    <string name="RegistrationFailedExplanantion">The registration failed. Error Code:</string>
 
-    <string name="InternalFailureExplanantion">The server reported an internal failure. Please contact the administrator</string>
-    <string name="AuthFailureExplanantion">The server reported an authentication failure. Please contact the administrator</string>
-    <string name="RegistrationPendingExplanantion">Your device is still pending confirmation. Please contact the administrator</string>
-    <string name="RegistrationStartedExplanantion">Your device has been registered and is pending confirmation. If this is not the first time you see this alert, please contact the administrator</string>
-    <string name="ClientErrorExplanantion">The client reported an error establishing the connection. Please contact the administrator</string>
+    <string name="InternalFailureExplanantion">The server reported an internal failure. Please contact the
+        administrator
+    </string>
+    <string name="AuthFailureExplanantion">The server reported an authentication failure. Please contact the
+        administrator
+    </string>
+    <string name="RegistrationPendingExplanantion">Your device is still pending confirmation. Please contact the
+        administrator
+    </string>
+    <string name="RegistrationStartedExplanantion">Your device has been registered and is pending confirmation. If this
+        is not the first time you see this alert, please contact the administrator
+    </string>
+    <string name="ClientErrorExplanantion">The client reported an error establishing the connection. Please contact the
+        administrator
+    </string>
     <string name="UnknownErrorExplanation">Unknown failure. Please contact the administrator</string>
+    <string name="MalformedURLExplanation">Malformed URL. Please reinstll the App. (This will not be necessary soon)
+    </string>
+    <string name="DeviceNameDescription">Device Name (e.g. ludgernexus)</string>
 </resources>

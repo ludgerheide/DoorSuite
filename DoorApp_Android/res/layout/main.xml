@@ -4,46 +4,34 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+
     <Button
             android:layout_width="fill_parent"
             android:layout_height="196dp"
             android:text="@string/authButton_title"
-            android:id="@+id/buProcess" android:layout_gravity="left|center_vertical" android:onClick="process"
-            android:textSize="30dp" android:enabled="true"/>
+            android:id="@+id/buProcess"
+            android:layout_gravity="left|center_vertical"
+            android:onClick="process"
+            android:textSize="30dp"
+            android:enabled="true"/>
+
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/StatusNotAuthenticated"
-            android:id="@+id/tvAuhthenticated" android:layout_gravity="left|center_vertical"
-            android:gravity="center" android:textSize="25dp" android:textColor="#ff0000"/>
+            android:id="@+id/tvAuhthenticated"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#ff0000"/>
+
     <ProgressBar
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prActivity" android:indeterminate="true" android:indeterminateOnly="true"
+            android:id="@+id/prActivity"
+            android:indeterminate="true"
+            android:indeterminateOnly="true"
             android:visibility="invisible"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <!--suppress AndroidLintHardcodedText -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="URL:"
-                android:id="@+id/tvUrl" android:layout_gravity="center_horizontal|top"/>
-        <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/defaultURL"
-                android:id="@+id/tfUrl" android:layout_gravity="center_horizontal|top" android:editable="true"
-                android:maxLines="1" android:singleLine="true"
-                android:inputType="textUri"/>
-    </LinearLayout>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/AbortButtonTitle"
-            android:id="@+id/buAbort" android:layout_gravity="center" android:enabled="true"
-            android:visibility="invisible" android:onClick="abort"/>
+
 </LinearLayout>
 
