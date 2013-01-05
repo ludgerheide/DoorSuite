@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,13 +18,13 @@ import static com.lhtechnologies.DoorApp.CommonStuff.*;
 
 public class MainActivity extends Activity {
     //Instance variables
-    private TextView tvStatus;
+    private TextView tvStatus, tvFlatDoor;
     private ProgressBar prActivity;
-    private Button buProcess, buAbort;
-
-    private Context appContext;
+    private Button buFrontDoor, buFlatDoor, buAbort;
+    private EditText tfDoorCode;
 
     private final static int timeout = 30;
+    private final static int buzzerTimeout = 3;
     private ResponseReceiver receiver;
 
     @Override
@@ -38,11 +39,14 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
         tvStatus = (TextView) findViewById(R.id.tvAuhthenticated);
+        tvFlatDoor = (TextView) findViewById(R.id.tvFlatDoor);
         prActivity = (ProgressBar) findViewById(R.id.prActivity);
-        buProcess = (Button) findViewById(R.id.buProcess);
-        buAbort = (Button) findViewById(R.id.buAbort);
+        buFrontDoor = (Button) findViewById(R.id.buFrontDoor);
+        buFlatDoor = (Button) findViewById(R.id.buFlatDoor);
+        buAbort = (Button) findViewById(R.id.buAbortMain);
+        tfDoorCode = (EditText) findViewById(R.id.tfDoorCode);
 
-        appContext = this.getApplicationContext();
+        Context appContext = this.getApplicationContext();
 
         SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
 
@@ -69,13 +73,40 @@ public class MainActivity extends Activity {
         //Set the UI to indicate Progress
         prActivity.setVisibility(View.VISIBLE);
         buAbort.setVisibility(View.VISIBLE);
-        tvStatus.setText(getString(R.string.StatusAuthenticating));
-        tvStatus.setTextColor(Color.YELLOW);
-        buProcess.setEnabled(false);
 
         Intent authenticateIntent = new Intent(this, AuthenticatorService.class);
         authenticateIntent.setAction(authenticateAction);
-        startService(authenticateIntent);
+        if (view == findViewById(R.id.buFlatDoor)) {
+            String authCode = tfDoorCode.getText().toString();
+            if (authCode.matches("[0-9]+") && authCode.length() == 4) {
+                authenticateIntent.putExtra(FlatDoor, authCode);
+
+                buFlatDoor.setEnabled(false);
+                tvFlatDoor.setText(getString(R.string.StatusAuthenticating));
+                tvFlatDoor.setTextColor(Color.YELLOW);
+                startService(authenticateIntent);
+            } else {
+                //Create an alert and show it
+                AlertDialog.Builder errorAlertBuilder = new AlertDialog.Builder(this);
+
+                errorAlertBuilder.setTitle(getString(R.string.InvalidTextTitle));
+                errorAlertBuilder.setMessage(getString(R.string.InvalidTextExplanantion));
+                errorAlertBuilder.setNeutralButton(getString(R.string.OKButtonTitle), null);
+
+                // create alert dialog
+                AlertDialog alertDialog = errorAlertBuilder.create();
+
+                // show it
+                alertDialog.show();
+                resetUI();
+            }
+        } else {
+            buFrontDoor.setEnabled(false);
+            tvStatus.setText(getString(R.string.StatusAuthenticating));
+            tvStatus.setTextColor(Color.YELLOW);
+            startService(authenticateIntent);
+        }
+
     }
 
     public void abort(View view) {
@@ -90,10 +121,13 @@ public class MainActivity extends Activity {
         buAbort.setVisibility(View.INVISIBLE);
         tvStatus.setText(getString(R.string.StatusNotAuthenticated));
         tvStatus.setTextColor(Color.RED);
-        buProcess.setEnabled(true);
+        tvFlatDoor.setText(getString(R.string.StatusNotAuthenticated));
+        tvFlatDoor.setTextColor(Color.RED);
+        buFrontDoor.setEnabled(true);
+        buFlatDoor.setEnabled(true);
     }
 
-    public class ResponseReceiver extends BroadcastReceiver {
+    private class ResponseReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -102,25 +136,47 @@ public class MainActivity extends Activity {
             if (intent.hasExtra(AuthenticatorReturnCode)) {
                 String returnCode = intent.getStringExtra(AuthenticatorReturnCode);
                 if (returnCode.equals(ServerReturnSuccess)) {
-                    //Authentication was a success, do the honors
-
-                    //Start the timer
-                    CountDownTimer authCountdown = new CountDownTimer(timeout * 1000, 1000) {
-
-                        public void onTick(long millisUntilFinished) {
-                            tvStatus.setText(getString(R.string.StatusAuthenticated) + " – " + millisUntilFinished / 1000);
-                        }
-
-                        public void onFinish() {
-                            resetUI();
-                        }
-                    }.start();
-
-                    //Set the UI
                     prActivity.setVisibility(View.INVISIBLE);
                     buAbort.setVisibility(View.INVISIBLE);
-                    buProcess.setEnabled(false);
-                    tvStatus.setTextColor(Color.GREEN);
+                    if (intent.hasExtra(FlatDoor)) {
+                        //Start the timer
+                        new CountDownTimer(buzzerTimeout * 1000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                                tvFlatDoor.setText(getString(R.string.StatusBuzzing) + " – " + millisUntilFinished / 1000);
+                            }
+
+                            public void onFinish() {
+                                buFlatDoor.setEnabled(true);
+                                tvFlatDoor.setText(getString(R.string.StatusNotAuthenticated));
+                                tvFlatDoor.setTextColor(Color.RED);
+                            }
+                        }.start();
+
+                        buFlatDoor.setEnabled(false);
+                        tvFlatDoor.setTextColor(Color.GREEN);
+
+                    } else {
+                        //Authentication was a success, do the honors
+
+                        //Start the timer
+                        new CountDownTimer(timeout * 1000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                                tvStatus.setText(getString(R.string.StatusAuthenticated) + " – " + millisUntilFinished / 1000);
+                            }
+
+                            public void onFinish() {
+                                buFrontDoor.setEnabled(true);
+                                tvStatus.setText(getString(R.string.StatusNotAuthenticated));
+                                tvStatus.setTextColor(Color.RED);
+                            }
+                        }.start();
+
+                        //Set the UI
+                        buFrontDoor.setEnabled(false);
+                        tvStatus.setTextColor(Color.GREEN);
+                    }
                 } else {
                     title = getString(R.string.AuthenticationFailedTitle);
                     String result = intent.getStringExtra(AuthenticatorReturnCode);

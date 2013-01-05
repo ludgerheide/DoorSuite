@@ -23,8 +23,8 @@ import java.security.KeyStore;
 import static com.lhtechnologies.DoorApp.CommonStuff.*;
 
 public class AuthenticatorService extends IntentService {
-    String udid, secret, address, deviceName, clientVersion;
-    HttpsURLConnection urlConnection;
+    private String udid, secret, address, deviceName, clientVersion;
+    private HttpsURLConnection urlConnection;
 
     public AuthenticatorService() {
         super("AuthenticatorService");
@@ -102,8 +102,12 @@ public class AuthenticatorService extends IntentService {
 
                 //Write our stuff to the output stream;
                 out.write("deviceName=" + deviceName + "&udid=" + udid + "&secret=" + secret + "&clientVersion=" + clientVersion + "&doorToOpen=" + doorToOpen);
-                if (doorToOpen.equals(FlatDoor))
+                if (doorToOpen.equals(FlatDoor)) {
                     out.write("&authCode=" + authCode);
+                    //Put an extra in so the return knows we opened the flat door
+                    broadcastIntent.putExtra(FlatDoor, FlatDoor);
+                }
+
                 out.close();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

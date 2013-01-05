@@ -1,6 +1,6 @@
 package com.lhtechnologies.DoorApp;
 
-public final class CommonStuff {
+final class CommonStuff {
     static final String ServerReturnInternalFailure = "FAIL";
     static final String ServerReturnAuthFailure = "SECRET_INCORRECT";
     static final String ServerReturnRegistrationPending = "REGISTRATION_PENDING";

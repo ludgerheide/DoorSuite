@@ -5,25 +5,50 @@
               android:layout_height="fill_parent"
         >
 
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/DoorCode"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal|top"
+                android:textSize="20dp"/>
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tfDoorCode"
+                android:layout_gravity="center_horizontal|top"
+                android:textSize="40dp"
+                android:inputType="number"
+                android:enabled="true"
+                android:editable="false"/>
+
+    </LinearLayout>
+
     <Button
             android:layout_width="fill_parent"
-            android:layout_height="196dp"
-            android:text="@string/authButton_title"
-            android:id="@+id/buProcess"
+            android:layout_height="120dp"
+            android:text="@string/FlatDoorTitle"
+            android:id="@+id/buFlatDoor"
             android:layout_gravity="left|center_vertical"
             android:onClick="process"
             android:textSize="30dp"
             android:enabled="true"/>
 
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/StatusNotAuthenticated"
-            android:id="@+id/tvAuhthenticated"
-            android:layout_gravity="left|center_vertical"
-            android:gravity="center"
-            android:textSize="25dp"
-            android:textColor="#ff0000"/>
+            android:id="@+id/tvFlatDoor"
+            android:layout_gravity="center"
+            android:textColor="#ff0000"
+            android:textSize="25dp"/>
 
     <ProgressBar
             android:layout_width="fill_parent"
@@ -37,10 +62,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/AbortButtonTitle"
-            android:id="@+id/buAbort"
+            android:id="@+id/buAbortMain"
             android:layout_gravity="center"
             android:visibility="invisible"
             android:onClick="abort"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:text="@string/FrontDoorTitle"
+            android:id="@+id/buFrontDoor"
+            android:layout_gravity="left|center_vertical"
+            android:textSize="30dp"
+            android:enabled="true"
+            android:onClick="process"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/StatusNotAuthenticated"
+            android:id="@+id/tvAuhthenticated"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#ff0000"/>
 
 </LinearLayout>
 

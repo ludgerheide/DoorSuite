@@ -15,13 +15,16 @@ import static com.lhtechnologies.DoorApp.CommonStuff.*;
 
 public class Setup extends Activity {
     //UI Elements
-    TextView laCode;
-    EditText tfCode, tfUrl, tfDeviceName;
-    RadioButton rbHaveCode, rbNoCode;
-    ProgressBar progress;
-    Button buAbort;
+    private TextView laCode;
+    private EditText tfCode;
+    private EditText tfUrl;
+    private EditText tfDeviceName;
+    private RadioButton rbHaveCode;
+    private RadioButton rbNoCode;
+    private ProgressBar progress;
+    private Button buAbort;
 
-    static final String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
+    private static final String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
     private ResponseReceiver receiver;
 
     @Override
@@ -42,7 +45,7 @@ public class Setup extends Activity {
         rbHaveCode = (RadioButton) findViewById(R.id.rbHaveCode);
         rbNoCode = (RadioButton) findViewById(R.id.rbNoCode);
         progress = (ProgressBar) findViewById(R.id.progressBar);
-        buAbort = (Button) findViewById(R.id.buAbort);
+        buAbort = (Button) findViewById(R.id.buAbortSetup);
     }
 
     @Override
@@ -149,7 +152,7 @@ public class Setup extends Activity {
         return sb.toString();
     }
 
-    public class ResponseReceiver extends BroadcastReceiver {
+    private class ResponseReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

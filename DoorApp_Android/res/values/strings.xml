@@ -4,10 +4,13 @@
 
     <!-- GUI !-->
     <string name="AbortButtonTitle">Abort</string>
-    <string name="authButton_title">Authenticate</string>
+    <string name="FrontDoorTitle">Open the front door</string>
+    <string name="FlatDoorTitle">Open the flat door</string>
+    <string name="DoorCode">Authentification code:</string>
     <string name="StatusNotAuthenticated">"Status: Not Authenticated"</string>
     <string name="StatusAuthenticating">Status: Connecting</string>
     <string name="StatusAuthenticated">Status: Authenticated</string>
+    <string name="StatusBuzzing">Status: Buzzing</string>
 
     <!-- Setup screen !-->
     <string name="ScreenTitle">Initial setup</string>

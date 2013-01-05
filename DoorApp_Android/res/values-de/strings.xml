@@ -4,10 +4,13 @@
 
     <!-- GUI !-->
     <string name="AbortButtonTitle">Abbrechen</string>
-    <string name="authButton_title">Authentifizieren</string>
+    <string name="FrontDoorTitle">Haustür Öffnen</string>
+    <string name="FlatDoorTitle">Wohnungstür Öffnen</string>
+    <string name="DoorCode">Authentifizierungscode:</string>
     <string name="StatusNotAuthenticated">"Status: Nicht Authentifiziert"</string>
     <string name="StatusAuthenticating">Status: Verbinden…</string>
     <string name="StatusAuthenticated">Status: Authentifiziert</string>
+    <string name="StatusBuzzing">Status: Offen</string>
 
     <!-- Setup screen !-->
     <string name="ScreenTitle">Setup</string>
