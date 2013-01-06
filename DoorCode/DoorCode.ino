@@ -8,7 +8,7 @@
 #define OUT_GABELPIN 12 //Simulates hanging up the phone to reset bell State
 #define OUT_SILENTPIN 13 //Ringer/Silent switch
 
-#define AUTHTIMEOUT 30 //The timout value in seconds
+#define AUTHTIMEOUT 75L //The timout value in seconds
 #define GABELTIMEOUT 500 //Bell reset length in milliseconds
 #define BUZZERTIMEOUT 500 //Buzzer reset length in milliseconds
 #define BUZZERCOOLDOWN 6000 //Do not allow triggering for this period
@@ -61,7 +61,7 @@ void authenticate() {
   //Stop any timers from earlier authentications
   if(authTimer != -1)
     t_auth.stop(authTimer);
-  authTimer = t_auth.after(AUTHTIMEOUT * 1000, deauthenticate);
+  authTimer = t_auth.after(AUTHTIMEOUT * 1000L, deauthenticate);
   authenticated = true;
   digitalWrite(OUT_SILENTPIN, GROUND_ON);
   delay(GEDENKSEKUNDE);
