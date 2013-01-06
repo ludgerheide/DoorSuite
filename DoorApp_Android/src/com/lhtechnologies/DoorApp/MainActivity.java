@@ -1,7 +1,15 @@
+/*
+ * Copyright © 2012 Ludger Heide ludger.heide@gmail.com
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar. See the COPYING file for more details..
+ */
+
 package com.lhtechnologies.DoorApp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.*;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,17 +32,11 @@ public class MainActivity extends Activity {
     private EditText tfDoorCode;
 
     private ResponseReceiver receiver;
+    private CountDownTimer flatDoorTimer, frontDoorTimer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Register as broadcast receiver for the authenticator
-        IntentFilter filter = new IntentFilter(AuthenticationFinishedBroadCast);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-        filter.setPriority(2);
-        receiver = new ResponseReceiver();
-        registerReceiver(receiver, filter);
 
         setContentView(R.layout.main);
         tvStatus = (TextView) findViewById(R.id.tvAuhthenticated);
@@ -66,6 +68,20 @@ public class MainActivity extends Activity {
     public void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+        //resetUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Register as broadcast receiver for the authenticator
+        IntentFilter filter = new IntentFilter(AuthenticationFinishedBroadCast);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.setPriority(2);
+        receiver = new ResponseReceiver();
+        registerReceiver(receiver, filter);
+        NotificationManager mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(FailureNotificationId);
     }
 
     public void process(View view) {
@@ -124,6 +140,10 @@ public class MainActivity extends Activity {
         tvFlatDoor.setTextColor(Color.RED);
         buFrontDoor.setEnabled(true);
         buFlatDoor.setEnabled(true);
+        if (flatDoorTimer != null)
+            flatDoorTimer.cancel();
+        if (frontDoorTimer != null)
+            frontDoorTimer.cancel();
     }
 
     private class ResponseReceiver extends BroadcastReceiver {
@@ -139,7 +159,7 @@ public class MainActivity extends Activity {
                     buAbort.setVisibility(View.INVISIBLE);
                     if (intent.hasExtra(FlatDoor)) {
                         //Start the timer
-                        new CountDownTimer(buzzerTimeout * 1000, 1000) {
+                        flatDoorTimer = new CountDownTimer(buzzerTimeout * 1000, 1000) {
 
                             public void onTick(long millisUntilFinished) {
                                 tvFlatDoor.setText(getString(R.string.StatusBuzzing) + " – " + millisUntilFinished / 1000);
@@ -159,7 +179,7 @@ public class MainActivity extends Activity {
                         //Authentication was a success, do the honors
 
                         //Start the timer
-                        new CountDownTimer(timeout * 1000, 1000) {
+                        frontDoorTimer = new CountDownTimer(timeout * 1000, 1000) {
 
                             public void onTick(long millisUntilFinished) {
                                 tvStatus.setText(getString(R.string.StatusAuthenticated) + " – " + millisUntilFinished / 1000);

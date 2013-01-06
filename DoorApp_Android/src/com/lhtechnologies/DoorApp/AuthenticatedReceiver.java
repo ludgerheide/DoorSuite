@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2012 Ludger Heide ludger.heide@gmail.com
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar. See the COPYING file for more details..
+ */
+
 package com.lhtechnologies.DoorApp;
 
 import android.app.Notification;
@@ -8,29 +15,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.lhtechnologies.DoorApp.CommonStuff.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ludger
- * Date: 06.01.13
- * Time: 10:39
- * To change this template use File | Settings | File Templates.
- */
 public class AuthenticatedReceiver extends BroadcastReceiver {
-    private static final int SuccessNotificationId = 1;
-    private static final int FailureNotificationId = 2;
-    private static final int BuzzingNotificationId = 3;
 
-    Timer timer;
-    NotificationManager mNotificationManager;
+    private Timer timer;
+    private NotificationManager mNotificationManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.e(this.getClass().getSimpleName(), "Received Broadcast!");
         if (intent.getAction().equals(AuthenticationFinishedBroadCast)) {
             String reason;
             mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

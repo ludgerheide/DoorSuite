@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2012 Ludger Heide ludger.heide@gmail.com
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar. See the COPYING file for more details..
+ */
+
 package com.lhtechnologies.DoorApp;
 
 final class CommonStuff {
@@ -14,10 +21,12 @@ final class CommonStuff {
     static final String UDIDKey = "udid";
     static final String AddressKey = "address";
     static final String DeviceNameKey = "device";
+    static final String SSIDKey = "ssid";
     static final String UndefinedUDID = "undefined_udid";
     static final String UndefinedSecret = "undefined_secret";
     static final String UndefinedAddress = "undefined_address";
     static final String UndefinedDeviceName = "Undefined Device Name";
+    static final String UndefinedSSID = "Undefined_SSID";
 
     static final String FlatDoor = "FlatDoor";
     static final String FrontDoor = "FrontDoor";
@@ -28,6 +37,12 @@ final class CommonStuff {
     static final String stopAction = "STOP";
     static final String authenticateAction = "AUTH";
 
-    final static int timeout = 30;
+    final static int timeout = 75;
     final static int buzzerTimeout = 3;
+
+    static final int SuccessNotificationId = 1;
+    static final int FailureNotificationId = 2;
+    static final int BuzzingNotificationId = 3;
+    static final String chosenSSID = "\"avalon vorne\"";
+    static final String otherSSID = "\"avalon hinten\"";
 }

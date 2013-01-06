@@ -1,5 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="">
-    <module2copyright />
+  <settings default="WTFPL">
+    <module2copyright>
+      <element module="All" copyright="WTFPL" />
+    </module2copyright>
   </settings>
 </component>

@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2012 Ludger Heide ludger.heide@gmail.com
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar. See the COPYING file for more details..
+ */
+
 package com.lhtechnologies.DoorApp;
 
 import android.app.IntentService;
@@ -54,7 +61,8 @@ public class AuthenticatorService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent.getAction().equals(stopAction)) {
-            urlConnection.disconnect();
+            if (urlConnection != null)
+                urlConnection.disconnect();
             urlConnection = null;
 
         } else if (intent.getAction().equals(authenticateAction)) {
@@ -72,7 +80,6 @@ public class AuthenticatorService extends IntentService {
 
             //Prepare the return intent
             Intent broadcastIntent = new Intent(AuthenticationFinishedBroadCast);
-            broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
 
             try {
                 //Try to create the URL, return an error if it fails
@@ -131,6 +138,7 @@ public class AuthenticatorService extends IntentService {
                     urlConnection.disconnect();
                 //Now send a broadcast with the result
                 sendOrderedBroadcast(broadcastIntent, null);
+                Log.e(this.getClass().getSimpleName(), "Send Broadcast!");
             }
         }
 
