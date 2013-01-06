@@ -71,8 +71,7 @@ public class AuthenticatorService extends IntentService {
             URL url;
 
             //Prepare the return intent
-            Intent broadcastIntent = new Intent();
-            broadcastIntent.setAction(AuthenticationFinishedBroadCast);
+            Intent broadcastIntent = new Intent(AuthenticationFinishedBroadCast);
             broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
 
             try {
@@ -131,7 +130,7 @@ public class AuthenticatorService extends IntentService {
                 if (urlConnection != null)
                     urlConnection.disconnect();
                 //Now send a broadcast with the result
-                sendBroadcast(broadcastIntent);
+                sendOrderedBroadcast(broadcastIntent, null);
             }
         }
 

@@ -23,8 +23,6 @@ public class MainActivity extends Activity {
     private Button buFrontDoor, buFlatDoor, buAbort;
     private EditText tfDoorCode;
 
-    private final static int timeout = 30;
-    private final static int buzzerTimeout = 3;
     private ResponseReceiver receiver;
 
     @Override
@@ -34,6 +32,7 @@ public class MainActivity extends Activity {
         //Register as broadcast receiver for the authenticator
         IntentFilter filter = new IntentFilter(AuthenticationFinishedBroadCast);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.setPriority(2);
         receiver = new ResponseReceiver();
         registerReceiver(receiver, filter);
 
@@ -227,6 +226,7 @@ public class MainActivity extends Activity {
                 alertDialog.show();
                 resetUI();
             }
+            abortBroadcast();
         }
     }
 }

@@ -33,5 +33,12 @@
         <service
                 android:name=".AuthenticatorService">
         </service>
+
+        <receiver android:name=".AuthenticatedReceiver">
+            <intent-filter android:priority="1">
+                <action android:name="com.lhtechnologies.custom.intent.action.AuthFinBroad"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>

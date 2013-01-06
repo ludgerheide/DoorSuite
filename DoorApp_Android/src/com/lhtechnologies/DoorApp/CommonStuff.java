@@ -24,7 +24,10 @@ final class CommonStuff {
 
     static final String AuthenticatorReturnCode = "AuthRetCod";
     static final String AuthenticatorErrorDescription = "ErrDesc";
-    static final String AuthenticationFinishedBroadCast = "AUTHFIN";
+    static final String AuthenticationFinishedBroadCast = "com.lhtechnologies.custom.intent.action.AuthFinBroad";
     static final String stopAction = "STOP";
     static final String authenticateAction = "AUTH";
+
+    final static int timeout = 30;
+    final static int buzzerTimeout = 3;
 }

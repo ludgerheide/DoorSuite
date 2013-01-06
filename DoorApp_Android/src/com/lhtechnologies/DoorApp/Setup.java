@@ -35,6 +35,7 @@ public class Setup extends Activity {
         //Register as broadcast receiver for the authenticator
         IntentFilter filter = new IntentFilter(AuthenticationFinishedBroadCast);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.setPriority(3);
         receiver = new ResponseReceiver();
         registerReceiver(receiver, filter);
 
@@ -198,6 +199,7 @@ public class Setup extends Activity {
 
             // show it
             alertDialog.show();
+            abortBroadcast();
         }
     }
 }
