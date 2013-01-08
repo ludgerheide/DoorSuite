@@ -63,11 +63,12 @@ function tryAuth($udid, $hashedSecret, $deviceName, $clientVersion, $doorToOpen,
 
             //Now check which door we want top open and send the correct message
             if ($doorToOpen == "FrontDoor") {
-                $serial->sendMessage("a");
+                $serial->sendMessage("!Front");
                 //Read out the stuff
+                $read = "fail";
                 $read = $serial->readPort();
                 //DEBUG
-                //echo $read;
+                echo $read;
                 // If you want to change the configuration, the device must be closed
                 $serial->deviceClose();
 
@@ -76,11 +77,12 @@ function tryAuth($udid, $hashedSecret, $deviceName, $clientVersion, $doorToOpen,
                 else
                     return "FAIL";
             } else if ($doorToOpen == "FlatDoor") {
-                $serial->sendMessage("F:" + $authCode);
+                $serial->sendMessage("!Flat" + $authCode);
                 //Read out the stuff
+                $read = "fail";
                 $read = $serial->readPort();
                 //DEBUG
-                //echo $read;
+                echo $read;
                 // If you want to change the configuration, the device must be closed
                 $serial->deviceClose();
 
