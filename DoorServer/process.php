@@ -20,8 +20,8 @@
 					echo 'Gerät erfolgreich registriert. ';
 				else 
 					echo 'Abfrage (registrieren) konnte nicht ausgeführt werden: ' . mysql_error();				
-			} else if($action == "Unregister" && $id !='') {
-			$update_query="UPDATE devices SET authenticated=0 WHERE id= '$id'";
+			} else if($action == "Delete" && $id !='') {
+			$update_query="DELETE FROM devices WHERE id= '$id'";
 				if (mysql_query($update_query)) 
 					echo 'Gerät erfolgreich gelöscht. ';
 				else 

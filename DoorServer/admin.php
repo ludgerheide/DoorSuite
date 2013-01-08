@@ -38,9 +38,9 @@
 							</form></td>";
 				else
 					echo "	<td><form method=\"post\" action=\"process.php\">
-								<input name=\"action\" type=hidden value=\"Unregister\">
+								<input name=\"action\" type=hidden value=\"Delete\">
 								<input name=\"id\" type=\"hidden\" value=\"".$row[0]."\">
-								<input type=\"submit\" value=\"Registrierung löschen\">
+								<input type=\"submit\" value=\"Gerät löschen\">
 							</form></td>";
 				echo '</tr>';
 			}

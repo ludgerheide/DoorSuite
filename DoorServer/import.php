@@ -7,8 +7,10 @@
 	/* Datenbankuser */
 	$db_user = 'doorApp';
 	/* Datenbankpasswort */
-	$db_passwort = 'hDAFSW3ReUfy52DH';
+	$db_passwort = 'testpass';
 	/* Erstellt Connect zu Datenbank her */
 	$db = @ mysql_connect ( $db_server, $db_user, $db_passwort );
 	$db_select = @ mysql_select_db( $db_name );
+        
+        $supportedVersion = 1;
 ?>
