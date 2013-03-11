@@ -12,5 +12,5 @@
 	$db = @ mysql_connect ( $db_server, $db_user, $db_passwort );
 	$db_select = @ mysql_select_db( $db_name );
         
-        $supportedVersion = 1;
+	$supportedVersion = 1;
 ?>
