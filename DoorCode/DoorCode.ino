@@ -1,17 +1,23 @@
 #include <Timer.h>
 #include <Event.h>
 
-#define IN_BELLPIN 2 //Must be 2 or 3 for interrupts
-#define IN_AUTHPIN 3 //Must be 2 or 3 for interrupts
+#define IN_FRONTBELL 2 //Must be 2 or 3 for interrupts
 
-#define OUT_BUZZERPIN 11 //Operates the door buzzer
+//Flat door control
+#define OUT_FLATBUZZER 10
+
+//Front door control
+#define OUT_FRONTBUZZER 11 //Operates the door buzzer
 #define OUT_GABELPIN 12 //Simulates hanging up the phone to reset bell State
 #define OUT_SILENTPIN 13 //Ringer/Silent switch
 
-#define AUTHTIMEOUT 75L //The timout value in seconds
+//TImeout/Cooldown values
+#define AUTHTIMEOUT 120L //The timout value in seconds
 #define GABELTIMEOUT 500 //Bell reset length in milliseconds
-#define BUZZERTIMEOUT 500 //Buzzer reset length in milliseconds
-#define BUZZERCOOLDOWN 6000 //Do not allow triggering for this period
+#define FRONTBUZZERTIMEOUT 500 //Buzzer reset length in milliseconds
+#define FLATBUZZERTIMEOUT 1000 //Flat Buzzer time in milliseconds
+#define FRONTBUZZERCOOLDOWN 3000 //Do not allow triggering for this period
+#define SERIALCOOLDOWN 1000 //How long we ignore serial after we get a byte
 
 #define GROUND_ON HIGH //High for darlington array, low for crazy direct method
 #define GROUND_OFF LOW
@@ -19,36 +25,44 @@
 
 int authTimer = -1;
 int gabelTimer = -1;
-int buzzerTimer = -1;
+int frontBuzzerTimer = -1;
+int flatBuzzerTimer = -1;
 int cooldownTimer = -1;
+int serialCooldown = -1;
 
 int openingsRemaining = 2;
 
 boolean authenticated = false;
-boolean buzzerOnCooldown = false;
-volatile boolean isRinging = false;
-volatile boolean authButtonPressed = false;
+boolean frontBuzzerOnCooldown = false;
+boolean serialOnCooldown = false;
+volatile boolean frontBellRinging = false;
+volatile boolean flatBellRinging = false;
 
 int inByte = 0;
 Timer t_auth;
 Timer t_gabel;
-Timer t_buzzer;
+Timer t_frontBuzzer;
+Timer t_flatBuzzer;
 Timer t_cooldown;
+Timer t_serialCooldown;
+
+//Stuff for FlatDoor
+char authCodeBuffer[4];
+char receivedCodeBuffer[4];
 
 void setup() {
   // start serial port at 9600 bps and wait for port to open:
   Serial.begin(9600);
 
-  pinMode(IN_BELLPIN, INPUT);
-  digitalWrite(IN_BELLPIN, LOW);
-  attachInterrupt(IN_BELLPIN - 2, bell, RISING);
+  pinMode(IN_FRONTBELL, INPUT);
+  digitalWrite(IN_FRONTBELL, HIGH); //TODO: Change Back for prod
+  attachInterrupt(IN_FRONTBELL - 2, frontBell, LOW); //TODO: Change back for prod
 
-  pinMode(IN_AUTHPIN, INPUT);
-  digitalWrite(IN_AUTHPIN, HIGH);
-  attachInterrupt(IN_AUTHPIN - 2, authButton, LOW);
+  pinMode(OUT_FLATBUZZER, OUTPUT);
+  digitalWrite(OUT_FLATBUZZER, GROUND_OFF);
 
-  pinMode(OUT_BUZZERPIN, OUTPUT);
-  digitalWrite(OUT_BUZZERPIN, GROUND_OFF);
+  pinMode(OUT_FRONTBUZZER, OUTPUT);
+  digitalWrite(OUT_FRONTBUZZER, GROUND_OFF);
 
   pinMode(OUT_GABELPIN, OUTPUT);
   digitalWrite(OUT_GABELPIN, GROUND_OFF);
@@ -63,6 +77,14 @@ void authenticate() {
     t_auth.stop(authTimer);
   authTimer = t_auth.after(AUTHTIMEOUT * 1000L, deauthenticate);
   authenticated = true;
+
+  //Generate a random code and display it
+  for(byte i = 0; i < 4; i++) {
+    authCodeBuffer[i] = '0'; //random('0','9'); TODO: change for PROD
+    Serial.print(authCodeBuffer[i]);  //TODO:Change to SoftwareSerial 
+  }    
+  Serial.println(' '); //TODO: Remove
+
   digitalWrite(OUT_SILENTPIN, GROUND_ON);
   delay(GEDENKSEKUNDE);
   Serial.println("Authenticated");
@@ -73,17 +95,20 @@ void deauthenticate() {
   t_auth.stop(authTimer);
   openingsRemaining = 2;
   authTimer = -1;
+
+  //remove the code from the display
+  Serial.println("Removing Code..."); //TODO:change to print(0x76);
   digitalWrite(OUT_SILENTPIN, GROUND_OFF);
   delay(GEDENKSEKUNDE);
   Serial.println("Deauthenticated");
 }
 
-void bell() {
-  isRinging = true;
+void frontBell() {
+  frontBellRinging = true;
 }
 
-void authButton() {
-  authButtonPressed = true;
+void flatBell() {
+  flatBellRinging = true;
 }
 
 void gabelOn() {
@@ -103,79 +128,128 @@ void gabelOff() {
   Serial.println("GabelOff");
 }
 
-void buzzerOn() {
-  Serial.print("BuzzerOn called - ");
-  if(buzzerOnCooldown == false) {
-    if(buzzerTimer != -1)
-      t_buzzer.stop(buzzerTimer);
-    buzzerTimer = t_buzzer.after(BUZZERTIMEOUT, buzzerOff);
+void frontBuzzerOn() {
+  Serial.print("FrontBuzzerOn called - ");
+  if(frontBuzzerOnCooldown == false) {
+    if(frontBuzzerTimer != -1)
+      t_frontBuzzer.stop(frontBuzzerTimer);
+    frontBuzzerTimer = t_frontBuzzer.after(FRONTBUZZERTIMEOUT, frontBuzzerOff);
     openingsRemaining -= 1;
 
     //Set cooldown on and start the timer
-    cooldownTimer = t_cooldown.after(BUZZERCOOLDOWN, enableBuzzer);
-    buzzerOnCooldown = true;
+    cooldownTimer = t_cooldown.after(FRONTBUZZERCOOLDOWN, enableFrontBuzzer);
+    frontBuzzerOnCooldown = true;
 
-    digitalWrite(OUT_BUZZERPIN, GROUND_ON);
+    digitalWrite(OUT_FRONTBUZZER, GROUND_ON);
     delay(GEDENKSEKUNDE);
     Serial.println("opening");
   }
-  Serial.println("on cooldown, not authenticating");
+  Serial.println("on cooldown, not opening");
 }
 
-void buzzerOff() {
-  t_buzzer.stop(buzzerTimer);
-  buzzerTimer = -1;
-  digitalWrite(OUT_BUZZERPIN, GROUND_OFF);
-  Serial.println("BuzzerOff");
+void frontBuzzerOff() {
+  t_frontBuzzer.stop(frontBuzzerTimer);
+  frontBuzzerTimer = -1;
+  digitalWrite(OUT_FRONTBUZZER, GROUND_OFF);
+  Serial.println("FrontBuzzerOff");
 } 
 
-void enableBuzzer() {
+void enableFrontBuzzer() {
   t_cooldown.stop(cooldownTimer);
   cooldownTimer = -1;
-  buzzerOnCooldown = false;
+  frontBuzzerOnCooldown = false;
   Serial.println("Cooldown off");
 }
+
+void flatBuzzerOn() {
+  if(authenticated == true) {
+    byte codeIsCorrect = true;
+    for(byte i = 0; i < 4; i++) {
+      if(authCodeBuffer[i] != receivedCodeBuffer[i]) {
+        codeIsCorrect = false;        
+      }
+    }
+    if(codeIsCorrect) {
+      Serial.println("201 FlatDoor Correct!");
+      if(flatBuzzerTimer != -1)
+        t_flatBuzzer.stop(flatBuzzerTimer);
+      flatBuzzerTimer = t_flatBuzzer.after(FLATBUZZERTIMEOUT, flatBuzzerOff);
+      digitalWrite(OUT_FLATBUZZER, GROUND_ON);
+      deauthenticate();
+    } 
+    else {
+      Serial.println("400 Code Incorrect!");
+    }
+  } 
+  else {
+    Serial.println("401 Not authenticated!");
+  }
+}
+
+void flatBuzzerOff() {
+  t_flatBuzzer.stop(flatBuzzerTimer);
+  flatBuzzerTimer = -1;
+  digitalWrite(OUT_FLATBUZZER, GROUND_OFF);
+  Serial.println("FlatBuzzerOff");
+} 
+
+void enableSerial() {
+  t_serialCooldown.stop(serialCooldown);
+  serialCooldown = -1;
+  serialOnCooldown = false;
+}
+
 
 void loop() {
   t_auth.update();
   t_gabel.update();
-  t_buzzer.update();
+  t_frontBuzzer.update();
+  t_flatBuzzer.update();
   t_cooldown.update();
-  // if we get a valid byte, authenticate
+  t_serialCooldown.update();
+  // if we get a valid string, authenticate
   if (Serial.available()) {
     // get incoming byte:
     inByte = Serial.read();
-    if(inByte == 97) {
-      Serial.println("AuthOn serial");
-      deauthenticate;
-      authenticate();
+    //We need to ignore bytes if we are on cooldown
+    if(!serialOnCooldown) {
+      if(inByte == 97) {
+        Serial.println("200 AuthOn serial");
+        if(authenticated)
+          deauthenticate();
+        authenticate();
+        //Set cooldown on and start the timer
+        serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
+        serialOnCooldown = true;
+      }
+      if(inByte == 98) {
+        Serial.readBytesUntil(0x76, receivedCodeBuffer, 4);
+        flatBuzzerOn();
+        //Set cooldown on and start the timer
+        serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
+        serialOnCooldown = true;
+      }
     }
-  }
-
-  //If the authButton has been pressed, we do stuff, then reset its state
-  if(authButtonPressed == true) {
-    Serial.println("authButton pressed");
-    deauthenticate();
-    authenticate();
-    authButtonPressed = false;
   }
 
   //If the bell has been tung, we do stuff, the reset its state
-  if(isRinging == true) {
-    Serial.println("isRinging");
-    detachInterrupt(IN_BELLPIN - 2);
+  if(frontBellRinging == true) {
+    Serial.println("FrontBell Ringing");
     if(authenticated == true && openingsRemaining > 0) {
       gabelOn();
       delay(GEDENKSEKUNDE);
-      buzzerOn();
+      frontBuzzerOn();
     }
-    if(openingsRemaining <= 0) {
-      deauthenticate;
-    }
-    attachInterrupt(IN_BELLPIN - 2, bell, RISING);
-    isRinging = false;
+    frontBellRinging = false;
   }
 }
+
+
+
+
+
+
+
 
 
 

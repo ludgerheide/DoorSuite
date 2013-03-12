@@ -57,39 +57,32 @@ function tryAuth($udid, $hashedSecret, $deviceName, $clientVersion, $doorToOpen,
             $serial->confCharacterLength(8);
             $serial->confStopBits(1);
             $serial->confFlowControl("none");
-            // Then we need to open it
             $serial->deviceOpen(); // To write into
             $serial->serialflush();
 
             //Now check which door we want top open and send the correct message
             if ($doorToOpen == "FrontDoor") {
-                $serial->sendMessage("!Front");
+                $serial->sendMessage("a");
                 //Read out the stuff
-                $read = "fail";
                 $read = $serial->readPort();
-                //DEBUG
-                echo $read;
                 // If you want to change the configuration, the device must be closed
                 $serial->deviceClose();
 
-                if (substr_compare($read, "AuthOn serial", 0, 13) == 0)
+                if ($read != "" && substr_compare($read, "200", 0, 2) == 0) {
                     return "SUCCESS";
-                else
-                    return "FAIL";
+                } else
+                    return "FAIL " . $read;
             } else if ($doorToOpen == "FlatDoor") {
-                $serial->sendMessage("!Flat" + $authCode);
+                $serial->sendMessage('b' . $authCode);
                 //Read out the stuff
-                $read = "fail";
                 $read = $serial->readPort();
-                //DEBUG
-                echo $read;
                 // If you want to change the configuration, the device must be closed
                 $serial->deviceClose();
 
-                if (substr_compare($read, "AuthOn FlatDoor", 0, 13) == 0)
+                if ($read != "" && substr_compare($read, "201", 0, 2) == 0) {
                     return "SUCCESS";
-                else
-                    return "FAIL";
+                } else
+                    return "FAIL " . $read;
             }
         } else if ($isRegistered == 0)
             return "REGISTRATION_PENDING";
