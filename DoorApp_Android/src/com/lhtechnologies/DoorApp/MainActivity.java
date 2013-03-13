@@ -158,6 +158,9 @@ public class MainActivity extends Activity {
                     prActivity.setVisibility(View.INVISIBLE);
                     buAbort.setVisibility(View.INVISIBLE);
                     if (intent.hasExtra(FlatDoor)) {
+                        //We have opened the flat door, therefore deauthenticated, therefore we don't need the front door timer anymore
+                        frontDoorTimer.onFinish();
+                        frontDoorTimer.cancel();
                         //Start the timer
                         flatDoorTimer = new CountDownTimer(buzzerTimeout * 1000, 1000) {
 
@@ -212,7 +215,7 @@ public class MainActivity extends Activity {
                     else if (result.equals(ClientErrorMalformedURL))
                         reason = getString(R.string.MalformedURLExplanation);
                     else
-                        reason = getString(R.string.UnknownErrorExplanation);
+                        reason = getString(R.string.UnknownErrorExplanation) + result;
 
                     //Create an alert and show it
                     AlertDialog.Builder errorAlertBuilder = new AlertDialog.Builder(context);

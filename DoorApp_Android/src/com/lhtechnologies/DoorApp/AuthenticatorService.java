@@ -97,7 +97,7 @@ public class AuthenticatorService extends IntentService {
 
                 urlConnection = (HttpsURLConnection) url.openConnection();
                 urlConnection.setSSLSocketFactory(context.getSocketFactory());
-                urlConnection.setHostnameVerifier(SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+                urlConnection.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER); //FIXME: INSECURE!!!
                 urlConnection.setConnectTimeout(15000);
                 urlConnection.setRequestMethod("POST");
 

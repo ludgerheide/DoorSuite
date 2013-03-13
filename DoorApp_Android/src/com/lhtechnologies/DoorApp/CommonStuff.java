@@ -37,8 +37,8 @@ final class CommonStuff {
     static final String stopAction = "STOP";
     static final String authenticateAction = "AUTH";
 
-    final static int timeout = 75;
-    final static int buzzerTimeout = 3;
+    final static int timeout = 120;
+    final static int buzzerTimeout = 5;
 
     static final int SuccessNotificationId = 1;
     static final int FailureNotificationId = 2;
