@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -13,9 +13,6 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="4Vs-h5-R4f"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
@@ -28,9 +25,9 @@
                                     <segue destination="6" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="11"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rn5-ce-sT0">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rn5-ce-sT0">
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
-                                <state key="normal" title="Authenticate">
+                                <state key="normal" title="Front Door">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -43,33 +40,60 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Status: Not authenticated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6k-Cx-9V4">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="JxH-js-kYW"/>
+                                    <constraint firstAttribute="height" constant="50" id="yZM-Fh-Eqf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pQy-Ut-h3g"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pQy-Ut-h3g">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" type="user" id="xR2-3s-mMZ"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iF5-eT-1rG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" type="user" id="1vO-IW-Xsh"/>
+                                    <constraint firstAttribute="width" constant="97" type="user" id="OUv-0e-PwF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="NZ3-lH-eQ2"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Authentication Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJ7-7h-yZY">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="rn5-ce-sT0" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="10X-P6-Rm6"/>
-                            <constraint firstItem="10" firstAttribute="top" secondItem="j6k-Cx-9V4" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="52p-4n-kUw"/>
-                            <constraint firstItem="rn5-ce-sT0" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="9id-Hz-2A9"/>
-                            <constraint firstAttribute="bottom" secondItem="pQy-Ut-h3g" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="Gew-Nc-p1l"/>
+                            <constraint firstItem="iF5-eT-1rG" firstAttribute="leading" secondItem="SJ7-7h-yZY" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="9KP-VU-VQg"/>
+                            <constraint firstItem="rn5-ce-sT0" firstAttribute="top" secondItem="SJ7-7h-yZY" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="CRU-aH-FJS"/>
+                            <constraint firstItem="pQy-Ut-h3g" firstAttribute="top" secondItem="j6k-Cx-9V4" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="DmU-B3-q1v"/>
+                            <constraint firstItem="SJ7-7h-yZY" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="IKf-0A-Wi2"/>
+                            <constraint firstItem="iF5-eT-1rG" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="M6m-AK-XWG"/>
                             <constraint firstAttribute="trailing" secondItem="j6k-Cx-9V4" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="Ob0-5N-M8H"/>
                             <constraint firstItem="pQy-Ut-h3g" firstAttribute="centerX" secondItem="j6k-Cx-9V4" secondAttribute="centerX" type="user" id="TwL-bv-rnv"/>
+                            <constraint firstItem="SJ7-7h-yZY" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="user" id="UYL-Pn-ErY"/>
+                            <constraint firstAttribute="trailing" secondItem="rn5-ce-sT0" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="V7z-dK-Idk"/>
+                            <constraint firstItem="j6k-Cx-9V4" firstAttribute="top" secondItem="rn5-ce-sT0" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="WfY-Ln-Yy9"/>
+                            <constraint firstAttribute="trailing" secondItem="iF5-eT-1rG" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="a75-Ne-c7l"/>
                             <constraint firstAttribute="trailing" secondItem="10" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="apl-1S-UOC"/>
-                            <constraint firstAttribute="bottom" secondItem="10" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bcr-if-aDO"/>
-                            <constraint firstItem="j6k-Cx-9V4" firstAttribute="top" secondItem="rn5-ce-sT0" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="d9W-6B-SWs"/>
+                            <constraint firstAttribute="bottom" secondItem="10" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="bcr-if-aDO"/>
                             <constraint firstItem="j6k-Cx-9V4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="glt-Fv-JyD"/>
-                            <constraint firstItem="rn5-ce-sT0" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="user" id="xj3-ie-dbU"/>
+                            <constraint firstItem="iF5-eT-1rG" firstAttribute="bottom" secondItem="SJ7-7h-yZY" secondAttribute="bottom" type="user" id="h6a-bM-MDk"/>
+                            <constraint firstAttribute="bottom" secondItem="pQy-Ut-h3g" secondAttribute="bottom" constant="57" type="user" id="kAH-tV-0ha"/>
+                            <constraint firstItem="rn5-ce-sT0" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="kZb-o0-tCI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="aiActivity" destination="pQy-Ut-h3g" id="FiV-Jq-KF8"/>
-                        <outlet property="buProcess" destination="rn5-ce-sT0" id="WW6-iz-ObN"/>
+                        <outlet property="buFrontDoor" destination="rn5-ce-sT0" id="Xo1-53-dtR"/>
                         <outlet property="laAuthState" destination="j6k-Cx-9V4" id="OUe-Nu-PoP"/>
+                        <outlet property="tfAuthCode" destination="iF5-eT-1rG" id="SMQ-6x-00h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -155,6 +179,32 @@
             <point key="canvasLocation" x="368" y="182"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="LHFlipsideViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LHFlipsideViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="outlet" name="swAuthOnGPS" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="swAuthOnWLAN" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="tfAddress" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="LHMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LHMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="process:"/>
+                <relationship kind="action" name="togglePopover:"/>
+                <relationship kind="outlet" name="aiActivity" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="buFlatDoor" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buFrontDoor" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="laAuthState" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tfAuthCode" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

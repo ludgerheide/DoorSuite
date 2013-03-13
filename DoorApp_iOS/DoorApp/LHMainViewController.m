@@ -31,6 +31,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL) stringIsNumeric: (NSString*) string {
+    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+    NSNumber* number = [formatter numberFromString: string];
+    return !!number;    
+}
+
 #pragma mark - Flipside View Controller
 
 - (void)flipsideViewControllerDidLoad:(LHFlipsideViewController *)controller
@@ -89,7 +95,7 @@
 
 #pragma mark - UI-triggered methods
 
-- (IBAction)process:(id)sender {    
+- (IBAction)process:(id)sender {
     
     //Creates the URL request. Don't use cache
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: url] cachePolicy: NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
@@ -102,9 +108,31 @@
         [KeychainWrapper createKeychainValue: secret forIdentifier: LHDoorAppSecret];
     }
     
+    //Find the version
+    NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString* version = [infoDict objectForKey:@"CFBundleVersion"];
+    
+    //Find the door to open
+    NSString* authCode = @"aaaa";
+    NSString* doorToOpen;
+    if (sender == buFrontDoor) {
+        doorToOpen = @"FrontDoor";
+    } else if (sender == tfAuthCode) {
+        doorToOpen = @"FlatDoor";
+        //Now get the auth code from the text field, truncate it and check it to be numeric
+        if(tfAuthCode.text.length != 4 || ![self stringIsNumeric: tfAuthCode.text]) {
+            UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle: @"Invalid code!" message: @"Please enter four numbers!" delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
+            [failureAlert show];
+            return;
+        } else {
+            authCode = tfAuthCode.text;
+        }
+        
+    }
+    
     //Set the POST that includes our auth request
     theRequest.HTTPMethod = @"POST";
-    theRequest.HTTPBody = [[NSString stringWithFormat: @"deviceName=%@&udid=%@&secret=%@", [[UIDevice currentDevice] name], [[[UIDevice currentDevice] identifierForVendor] UUIDString], secret] dataUsingEncoding:NSUTF8StringEncoding];
+    theRequest.HTTPBody = [[NSString stringWithFormat: @"deviceName=%@&udid=%@&secret=%@&clientVersion=%@&doorToOpen=%@&authCode=%@", [[UIDevice currentDevice] name], [[[UIDevice currentDevice] identifierForVendor] UUIDString], secret, version, doorToOpen, authCode] dataUsingEncoding:NSUTF8StringEncoding];
     theRequest.TimeoutInterval = 5.0;
     
 	//Creates the URL connection with the request and starts loading thedata.
@@ -115,10 +143,11 @@
     receivedData = [[NSMutableData alloc] init];
     
     //Start the acitivity indicator
+    [self resetUI];
     [aiActivity startAnimating];
     laAuthState.text = @"Status: Connecting.";
     laAuthState.textColor = [UIColor yellowColor];
-    buProcess.enabled = NO;
+    buFrontDoor.enabled = NO;
     if(authCountdown)
         [authCountdown invalidate];
 }
@@ -181,7 +210,11 @@
     
     if([serverReturned isEqualToString: ServerReturnSuccess]) {
         //Start a timer counting doen the time we are still authenticated
-        time = AUTHTIMEOUT;
+        NSString* connectionString = [[NSString alloc] initWithData:[[connection currentRequest] HTTPBody] encoding: NSUTF8StringEncoding];
+        if([connectionString rangeOfString:@"&doorToOpen=FlatDoor"].location != NSNotFound)
+            time = FLATDOORTIMEOUT
+        else
+            time = FRONTDOORTIMEOUT;
         authCountdown = [NSTimer timerWithTimeInterval: 1 target: self selector: @selector(advanceTimer:) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer: authCountdown forMode: NSDefaultRunLoopMode];
         
@@ -206,7 +239,7 @@
         else if([serverReturned isEqualToString: ServerReturnRegistrationPending])
             reason = @"Your device is still pending confirmation. Please contact the administrator";
         else
-            reason = @"Unknown failure. Please contact the administrator";
+            reason = [NSString stringWithFormat: @"Unknown failure. The server reports:\n%@", serverReturned];
         
         //Create an alert and show it
         UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle: @"Authentication failed!" message: reason delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
@@ -221,7 +254,8 @@
     laAuthState.text = @"Status: Not authenticated";
     laAuthState.textColor = [UIColor redColor];
     [aiActivity stopAnimating];
-    buProcess.enabled = YES;
+    buFrontDoor.enabled = YES;
+    tfAuthCode.text = @"";
 	/* releases the connection */
 	if (self.connection) {
 		self.connection = nil;
@@ -280,9 +314,22 @@
 }
 
 - (void)viewDidUnload {
-    buProcess = nil;
+    buFrontDoor = nil;
     laAuthState = nil;
     aiActivity = nil;
+    tfAuthCode = nil;
     [super viewDidUnload];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == tfAuthCode) {
+        if (range.location == 3) {
+            tfAuthCode.text = [tfAuthCode.text stringByAppendingString: string];
+            [tfAuthCode resignFirstResponder];
+            [self process: tfAuthCode];
+            return YES;
+        }
+    }
+    return YES;
 }
 @end

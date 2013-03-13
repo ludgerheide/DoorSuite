@@ -18,7 +18,8 @@
 #define AuthOnGPSKey @"AuthOnGPS"
 
 #define LHDoorAppSecret @"LHDoorAppSecret"
-#define AUTHTIMEOUT 15;
+#define FRONTDOORTIMEOUT 120;
+#define FLATDOORTIMEOUT 5;
 
 #define ServerReturnSuccess @"SUCCESS"
 #define ServerReturnInternalFailure @"FAIL"
