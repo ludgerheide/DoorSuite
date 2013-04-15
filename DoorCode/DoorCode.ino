@@ -1,8 +1,12 @@
+#include <SoftwareSerial.h>
 #include <Timer.h>
 #include <Event.h>
 
 #define IN_FRONTBELL 2 //Must be 2 or 3 for interrupts
 
+//Serial Pins
+#define SOFTWARESERIALTX 5
+#define SOFTWARESERIALRX 6
 //Flat door control
 #define OUT_FLATBUZZER 10
 
@@ -50,13 +54,13 @@ Timer t_serialCooldown;
 char authCodeBuffer[4];
 char receivedCodeBuffer[4];
 
-void setup() {
-  // start serial port at 9600 bps and wait for port to open:
-  Serial.begin(9600);
+//SoftwareSerial
+SoftwareSerial displaySerial =  SoftwareSerial(SOFTWARESERIALRX, SOFTWARESERIALTX);
 
+void setup() {
   pinMode(IN_FRONTBELL, INPUT);
-  digitalWrite(IN_FRONTBELL, HIGH); //TODO: Change Back for prod
-  attachInterrupt(IN_FRONTBELL - 2, frontBell, LOW); //TODO: Change back for prod
+  digitalWrite(IN_FRONTBELL, LOW); //DONe: Change Back for prod
+  attachInterrupt(IN_FRONTBELL - 2, frontBell, HIGH); //DONE: Change back for prod
 
   pinMode(OUT_FLATBUZZER, OUTPUT);
   digitalWrite(OUT_FLATBUZZER, GROUND_OFF);
@@ -69,6 +73,16 @@ void setup() {
 
   pinMode(OUT_SILENTPIN, OUTPUT);
   digitalWrite(OUT_SILENTPIN, GROUND_OFF);
+  
+  pinMode(SOFTWARESERIALRX, INPUT);
+  pinMode(SOFTWARESERIALTX, OUTPUT);
+  
+  // start serial port at 9600 bps and wait for port to open:
+  Serial.begin(9600);
+  
+  //STart a SoftwareSerial
+  displaySerial.begin(9600);
+  
 }
 
 void authenticate() {
@@ -80,10 +94,10 @@ void authenticate() {
 
   //Generate a random code and display it
   for(byte i = 0; i < 4; i++) {
-    authCodeBuffer[i] = '0'; //random('0','9'); TODO: change for PROD
-    Serial.print(authCodeBuffer[i]);  //TODO:Change to SoftwareSerial 
+    authCodeBuffer[i] = random('0','9'); //DONE: change for PROD
+    displaySerial.print(authCodeBuffer[i]);  //DONE:Change to SoftwareSerial 
   }    
-  Serial.println(' '); //TODO: Remove
+  //Serial.println(' '); //DONE: Remove
 
   digitalWrite(OUT_SILENTPIN, GROUND_ON);
   delay(GEDENKSEKUNDE);
@@ -97,7 +111,7 @@ void deauthenticate() {
   authTimer = -1;
 
   //remove the code from the display
-  Serial.println("Removing Code..."); //TODO:change to print(0x76);
+  displaySerial.print('v'); //DONE:change to print(0x76);
   digitalWrite(OUT_SILENTPIN, GROUND_OFF);
   delay(GEDENKSEKUNDE);
   Serial.println("Deauthenticated");
