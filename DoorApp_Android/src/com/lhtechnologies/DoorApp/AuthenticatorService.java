@@ -61,10 +61,7 @@ public class AuthenticatorService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent.getAction().equals(stopAction)) {
-            if (urlConnection != null)
-                urlConnection.disconnect();
-            urlConnection = null;
-
+            stopSelf();
         } else if (intent.getAction().equals(authenticateAction)) {
             //Check if we want to open the front door or flat door
             String doorToOpen = FrontDoor;
@@ -85,6 +82,10 @@ public class AuthenticatorService extends IntentService {
                 //Try to create the URL, return an error if it fails
                 url = new URL(address);
 
+                if(!url.getProtocol().equals("https")) {
+                    throw new MalformedURLException("Please only use https protocol!");
+                }
+
                 String password = "password";
                 KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
                 keyStore.load(getResources().getAssets().open("LH Technologies Root CA.bks"), password.toCharArray());
@@ -97,7 +98,7 @@ public class AuthenticatorService extends IntentService {
 
                 urlConnection = (HttpsURLConnection) url.openConnection();
                 urlConnection.setSSLSocketFactory(context.getSocketFactory());
-                urlConnection.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER); //FIXME: INSECURE!!!
+                urlConnection.setHostnameVerifier(SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
                 urlConnection.setConnectTimeout(15000);
                 urlConnection.setRequestMethod("POST");
 
@@ -142,6 +143,15 @@ public class AuthenticatorService extends IntentService {
             }
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if (urlConnection != null) {
+            urlConnection.disconnect();
+            Log.i(this.getClass().getSimpleName(), "Disconnected!");
+            urlConnection = null;
+        }
     }
 
     private int getVersion() {

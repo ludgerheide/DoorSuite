@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
     public void abort(View view) {
         Intent stopIntent = new Intent(this, AuthenticatorService.class);
         stopIntent.setAction(stopAction);
-        startService(stopIntent);
+        stopService(stopIntent);
         resetUI();
     }
 
