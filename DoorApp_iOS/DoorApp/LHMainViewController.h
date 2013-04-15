@@ -13,7 +13,7 @@
 {
     NSURLConnection *connection;
     NSMutableData *receivedData;
-    NSString* url;
+    NSString* urlString;
     NSTimer *authCountdown;
     
     short time;
@@ -24,6 +24,7 @@
     __weak IBOutlet UILabel *laAuthState;
     __weak IBOutlet UIActivityIndicatorView *aiActivity;
     __weak IBOutlet UITextField *tfAuthCode;
+    __weak IBOutlet UIButton *buAbort;
 }
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
@@ -31,7 +32,9 @@
 
 -(BOOL)stringIsNumeric:(NSString*) string;
 -(IBAction)process:(id)sender;
+-(IBAction)abort:(id)sender;
 -(NSString *)generateRandomString: (int) length;
 -(void)advanceTimer: (NSTimer *)timer;
+-(void)resetUI;
 
 @end

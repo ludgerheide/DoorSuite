@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -24,9 +24,6 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="262" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-6n-33P">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="586" type="user" id="GMb-6o-Fml"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
                                 <state key="normal" title="Authenticate">
                                     <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,38 +54,58 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Status: Not Authenticated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHp-lo-NvO">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="287" type="user" id="Vph-Bi-CZC"/>
+                                    <constraint firstAttribute="height" constant="201" type="user" id="Qcc-zk-96b"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2ec-Ko-Igu"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2ec-Ko-Igu"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nw2-Ls-s33">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="468" id="WXM-KK-21U"/>
+                                    <constraint firstAttribute="height" constant="43" id="ajQ-WF-flD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Abort">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="abort:" destination="2" eventType="touchUpInside" id="WQg-XW-YBc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="nw2-Ls-s33" secondAttribute="bottom" constant="55" type="user" id="0JJ-j2-Vlj"/>
                             <constraint firstItem="13" firstAttribute="leading" secondItem="8" secondAttribute="leading" type="default" id="2QB-Bm-yyx"/>
                             <constraint firstAttribute="trailing" secondItem="cHp-lo-NvO" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="D1T-Hz-Jc0"/>
                             <constraint firstAttribute="trailing" secondItem="ZvZ-er-sDN" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="EGu-Pb-Amy"/>
+                            <constraint firstItem="nw2-Ls-s33" firstAttribute="top" secondItem="cHp-lo-NvO" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="FZZ-zA-pKs"/>
                             <constraint firstItem="ZvZ-er-sDN" firstAttribute="top" secondItem="8" secondAttribute="top" constant="65" type="user" id="HWD-R3-xUf"/>
                             <constraint firstItem="13" firstAttribute="top" secondItem="8" secondAttribute="top" type="default" id="Ite-tp-1De"/>
-                            <constraint firstItem="2ec-Ko-Igu" firstAttribute="centerX" secondItem="cHp-lo-NvO" secondAttribute="centerX" type="user" id="NId-bZ-aqo"/>
-                            <constraint firstItem="ZvZ-er-sDN" firstAttribute="bottom" secondItem="wEd-H7-ItY" secondAttribute="bottom" type="user" id="Ynv-Eb-2MB"/>
+                            <constraint firstItem="nw2-Ls-s33" firstAttribute="centerY" secondItem="2ec-Ko-Igu" secondAttribute="centerY" type="default" id="PPs-hO-XPT"/>
+                            <constraint firstItem="nw2-Ls-s33" firstAttribute="leading" secondItem="8" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="QJf-Sn-gqD"/>
+                            <constraint firstItem="Ya1-6n-33P" firstAttribute="top" secondItem="ZvZ-er-sDN" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="XTM-c0-I1B"/>
                             <constraint firstItem="Ya1-6n-33P" firstAttribute="top" secondItem="wEd-H7-ItY" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Z6Z-RQ-CX4"/>
                             <constraint firstItem="wEd-H7-ItY" firstAttribute="top" secondItem="8" secondAttribute="top" constant="65" type="user" id="ZHh-5Z-hgm"/>
                             <constraint firstAttribute="trailing" secondItem="Ya1-6n-33P" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="csJ-Ae-hEh"/>
                             <constraint firstItem="wEd-H7-ItY" firstAttribute="top" secondItem="ZvZ-er-sDN" secondAttribute="top" type="user" id="dcA-s4-YuS"/>
                             <constraint firstItem="Ya1-6n-33P" firstAttribute="leading" secondItem="8" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="hgC-XH-hVz"/>
-                            <constraint firstAttribute="bottom" secondItem="cHp-lo-NvO" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="lb5-hT-VSK"/>
+                            <constraint firstAttribute="trailing" secondItem="2ec-Ko-Igu" secondAttribute="trailing" constant="115" id="m4y-Hu-nSJ"/>
                             <constraint firstItem="wEd-H7-ItY" firstAttribute="leading" secondItem="8" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="rte-dB-tBV"/>
                             <constraint firstItem="13" firstAttribute="trailing" secondItem="8" secondAttribute="trailing" type="default" id="rxf-8n-QJS"/>
                             <constraint firstItem="cHp-lo-NvO" firstAttribute="top" secondItem="Ya1-6n-33P" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="tsJ-gf-I11"/>
                             <constraint firstItem="cHp-lo-NvO" firstAttribute="leading" secondItem="8" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uyc-jl-qKI"/>
-                            <constraint firstAttribute="bottom" secondItem="2ec-Ko-Igu" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="z8l-bf-8Yl"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="aiActivity" destination="2ec-Ko-Igu" id="1Vo-8m-tPq"/>
+                        <outlet property="buAbort" destination="nw2-Ls-s33" id="RYq-h7-gyk"/>
                         <outlet property="buFrontDoor" destination="Ya1-6n-33P" id="bA4-wo-raE"/>
                         <outlet property="laAuthState" destination="cHp-lo-NvO" id="IAs-Px-SNh"/>
                         <outlet property="tfAuthCode" destination="ZvZ-er-sDN" id="JxE-AX-o4b"/>
@@ -197,9 +214,11 @@
         <class className="LHMainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LHMainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="abort:"/>
                 <relationship kind="action" name="process:"/>
                 <relationship kind="action" name="togglePopover:"/>
                 <relationship kind="outlet" name="aiActivity" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="buAbort" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buFrontDoor" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="laAuthState" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tfAuthCode" candidateClass="UITextField"/>

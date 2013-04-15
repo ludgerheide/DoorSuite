@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     //Load the preferences
-    url = [[NSUserDefaults standardUserDefaults] objectForKey: URLKey];
+    urlString = [[NSUserDefaults standardUserDefaults] objectForKey: URLKey];
     authOnGPS = [[[NSUserDefaults standardUserDefaults] objectForKey: AuthOnGPSKey] boolValue];
     authOnWLAN = [[[NSUserDefaults standardUserDefaults] objectForKey: AuthOnWLANKey] boolValue];
 }
@@ -41,7 +41,7 @@
 
 - (void)flipsideViewControllerDidLoad:(LHFlipsideViewController *)controller
 {
-    controller.tfAddress.text = url;
+    controller.tfAddress.text = urlString;
     controller.swAuthOnGPS.on = authOnGPS;
     controller.swAuthOnWLAN.on = authOnWLAN;
 }
@@ -55,12 +55,12 @@
         self.flipsidePopoverController = nil;
     }
     //Get the changed prefs back into the main class
-    url = controller.tfAddress.text;
+    urlString = controller.tfAddress.text;
     authOnGPS = controller.swAuthOnWLAN.on;
     authOnWLAN = controller.swAuthOnGPS.on;
     
     //Write them to the settings
-    [[NSUserDefaults standardUserDefaults] setValue: url forKey: URLKey];
+    [[NSUserDefaults standardUserDefaults] setValue: urlString forKey: URLKey];
     [[NSUserDefaults standardUserDefaults] setValue: [NSNumber numberWithBool: authOnGPS] forKey: AuthOnGPSKey];
     [[NSUserDefaults standardUserDefaults] setValue: [NSNumber numberWithBool: authOnWLAN] forKey: AuthOnWLANKey];
     
@@ -98,7 +98,15 @@
 - (IBAction)process:(id)sender {
     
     //Creates the URL request. Don't use cache
-    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: url] cachePolicy: NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
+    NSURL* url = [NSURL URLWithString: urlString];
+    if(![url.scheme isEqual: @"https"]) {
+        NSString* reason = [NSString stringWithFormat: @"The protocol (%@) is invalid. Please change the URL to use https!", url.scheme];
+        UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle: @"Invalid protocol!" message: reason delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        [failureAlert show];
+        return;
+    }
+    
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: url cachePolicy: NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
     
     //Search the keychain for our secret, add a random one if none exists.
     NSString *secret = [KeychainWrapper keychainStringFromMatchingIdentifier: LHDoorAppSecret];
@@ -148,8 +156,13 @@
     laAuthState.text = @"Status: Connecting.";
     laAuthState.textColor = [UIColor yellowColor];
     buFrontDoor.enabled = NO;
+    buAbort.hidden = NO;
     if(authCountdown)
         [authCountdown invalidate];
+}
+
+- (IBAction)abort:(id)sender {
+    [self resetUI];
 }
 
 -(NSString *)generateRandomString: (int)length {
@@ -255,10 +268,12 @@
     laAuthState.textColor = [UIColor redColor];
     [aiActivity stopAnimating];
     buFrontDoor.enabled = YES;
+    buAbort.hidden = YES;
     tfAuthCode.text = @"";
 	/* releases the connection */
 	if (self.connection) {
-		self.connection = nil;
+		[connection cancel];
+        self.connection = nil;
     }
 }
 
@@ -318,6 +333,7 @@
     laAuthState = nil;
     aiActivity = nil;
     tfAuthCode = nil;
+    buAbort = nil;
     [super viewDidUnload];
 }
 
