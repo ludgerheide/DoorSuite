@@ -5,21 +5,21 @@
 #define IN_FRONTBELL 2 //Must be 2 or 3 for interrupts
 
 //Serial Pins
-#define SOFTWARESERIALTX 5
-#define SOFTWARESERIALRX 6
+#define SOFTWARESERIALTX 13
+#define SOFTWARESERIALRX 12
 //Flat door control
-#define OUT_FLATBUZZER 10
+#define OUT_FLATBUZZER 5
 
 //Front door control
-#define OUT_FRONTBUZZER 11 //Operates the door buzzer
-#define OUT_GABELPIN 12 //Simulates hanging up the phone to reset bell State
-#define OUT_SILENTPIN 13 //Ringer/Silent switch
+#define OUT_FRONTBUZZER 6 //Operates the door buzzer
+#define OUT_GABELPIN 7 //Simulates hanging up the phone to reset bell State
+#define OUT_SILENTPIN 8 //Ringer/Silent switch
 
 //TImeout/Cooldown values
 #define AUTHTIMEOUT 120L //The timout value in seconds
 #define GABELTIMEOUT 500 //Bell reset length in milliseconds
 #define FRONTBUZZERTIMEOUT 500 //Buzzer reset length in milliseconds
-#define FLATBUZZERTIMEOUT 1000 //Flat Buzzer time in milliseconds
+#define FLATBUZZERTIMEOUT 1000 //Flat Buzzer time in miSILENlliseconds
 #define FRONTBUZZERCOOLDOWN 3000 //Do not allow triggering for this period
 #define SERIALCOOLDOWN 1000 //How long we ignore serial after we get a byte
 
@@ -39,6 +39,7 @@ int openingsRemaining = 2;
 boolean authenticated = false;
 boolean frontBuzzerOnCooldown = false;
 boolean serialOnCooldown = false;
+boolean muted = false;
 volatile boolean frontBellRinging = false;
 volatile boolean flatBellRinging = false;
 
@@ -82,6 +83,7 @@ void setup() {
   
   //STart a SoftwareSerial
   displaySerial.begin(9600);
+  displaySerial.print('v');
   
 }
 
@@ -112,7 +114,8 @@ void deauthenticate() {
 
   //remove the code from the display
   displaySerial.print('v'); //DONE:change to print(0x76);
-  digitalWrite(OUT_SILENTPIN, GROUND_OFF);
+  if(!muted)
+    digitalWrite(OUT_SILENTPIN, GROUND_OFF);
   delay(GEDENKSEKUNDE);
   Serial.println("Deauthenticated");
 }
@@ -243,6 +246,29 @@ void loop() {
         serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
         serialOnCooldown = true;
       }
+      if(inByte == 99) {
+        //We are turning off until we receive 100 ('d')
+        Serial.println("Going offline");
+        deauthenticate(); 
+        displaySerial.print("OFF");
+        while(inByte != 100) {
+          inByte = Serial.read();
+        }
+        displaySerial.print('v'); 
+        displaySerial.print("ON");
+        delay(1000);
+        displaySerial.print('v');                
+      }
+      if(inByte == 101) {   
+        Serial.println("Muting...");     
+        muted = true;
+        digitalWrite(OUT_SILENTPIN, GROUND_ON);
+      }
+      if(inByte == 102) {
+        Serial.println("Unmuting...");
+        muted = false;
+        digitalWrite(OUT_SILENTPIN, GROUND_OFF);
+      }        
     }
   }
 
