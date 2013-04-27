@@ -9,7 +9,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.lhtechnologies.DoorApp"
           android:versionCode="2"
-          android:versionName="1.2">
+          android:versionName="1.2.1">
 
     <uses-sdk
             android:minSdkVersion="4"
@@ -51,14 +51,14 @@
             </intent-filter>
         </receiver>
 
-        <receiver
+        <!--receiver
                 android:name=".AuthenticateAutomatic"
                 android:label="DoorApp AutoAuth"
                 android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
-        </receiver>
+        </receiver-->
 
     </application>
 </manifest>
