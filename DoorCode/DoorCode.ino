@@ -291,7 +291,8 @@ void loop() {
       gabelOn();
       delay(GEDENKSEKUNDE);
       frontBuzzerOn();
-    } else if (openingsRemaining <= 0) { //REMOVE for full operation
+    }
+    if (openingsRemaining <= 0) { //REMOVE for full operation
       deauthenticate();
     }      
     frontBellRinging = false;
