@@ -259,7 +259,7 @@ void loop() {
         delay(1000);
         displaySerial.print('v');                
       }
-      if(inByte == 101) { //e   
+      if(inByte == 101) { //e
         Serial.println("Muting...");     
         muted = true;
         digitalWrite(OUT_SILENTPIN, GROUND_ON);
@@ -268,7 +268,7 @@ void loop() {
         Serial.println("Unmuting...");
         muted = false;
         digitalWrite(OUT_SILENTPIN, GROUND_OFF);
-      } 
+      }
       if(inByte == 103) { //g
         Serial.println("202 Authenticating and opening once");
         if(authenticated)
@@ -279,8 +279,8 @@ void loop() {
         serialOnCooldown = true;
         //Simulate ringing the front bell
         frontBellRinging = true;
-      } 
-      
+      }
+
     }
   }
 
@@ -291,7 +291,9 @@ void loop() {
       gabelOn();
       delay(GEDENKSEKUNDE);
       frontBuzzerOn();
-    }
+    } else if (openingsRemaining <= 0) { //REMOVE for full operation
+      deauthenticate();
+    }      
     frontBellRinging = false;
   }
 }
