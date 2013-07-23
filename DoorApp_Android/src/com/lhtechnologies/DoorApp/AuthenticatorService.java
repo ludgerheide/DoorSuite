@@ -71,6 +71,10 @@ public class AuthenticatorService extends IntentService {
                 authCode = intent.getCharSequenceExtra(FlatDoor).toString();
             }
 
+            if (intent.hasExtra(LetIn)) {
+                doorToOpen = LetIn;
+            }
+
             //Now run the connection code (Hope it runs asynchronously and we do not need AsyncTask --- NOPE --YES
             urlConnection = null;
             URL url;

@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     //Instance variables
     private TextView tvStatus, tvFlatDoor;
     private ProgressBar prActivity;
-    private Button buFrontDoor, buFlatDoor, buAbort;
+    private Button buFrontDoor, buLetIn, buFlatDoor, buAbort;
     private EditText tfDoorCode;
 
     private ResponseReceiver receiver;
@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
         tvFlatDoor = (TextView) findViewById(R.id.tvFlatDoor);
         prActivity = (ProgressBar) findViewById(R.id.prActivity);
         buFrontDoor = (Button) findViewById(R.id.buFrontDoor);
+        buLetIn = (Button) findViewById(R.id.buLetIn);
         buFlatDoor = (Button) findViewById(R.id.buFlatDoor);
         buAbort = (Button) findViewById(R.id.buAbortMain);
         tfDoorCode = (EditText) findViewById(R.id.tfDoorCode);
@@ -115,11 +116,19 @@ public class MainActivity extends Activity {
                 alertDialog.show();
                 resetUI();
             }
-        } else {
+        } else if (view == findViewById(R.id.buFrontDoor)) {
             buFrontDoor.setEnabled(false);
             tvStatus.setText(getString(R.string.StatusAuthenticating));
             tvStatus.setTextColor(Color.YELLOW);
             startService(authenticateIntent);
+        } else if (view == findViewById(R.id.buLetIn)) {
+            buFrontDoor.setEnabled(false);
+            tvStatus.setText(getString(R.string.StatusAuthenticating));
+            tvStatus.setTextColor(Color.YELLOW);
+            authenticateIntent.putExtra(LetIn, true);
+            startService(authenticateIntent);
+        } else {
+            throw new IllegalArgumentException("Unsupported Button!");
         }
 
     }

@@ -83,6 +83,17 @@ function tryAuth($udid, $hashedSecret, $deviceName, $clientVersion, $doorToOpen,
                     return "SUCCESS";
                 } else
                     return "FAIL " . $read;
+            } else if ($doorToOpen == "LetIn") {
+                $serial->sendMessage('f');
+                //Read out the stuff
+                $read = $serial->readPort();
+                // If you want to change the configuration, the device must be closed
+                $serial->deviceClose();
+
+                if ($read != "" && substr_compare($read, "202", 0, 2) == 0) {
+                    return "SUCCESS";
+                } else
+                    return "FAIL " . $read;
             }
         } else if ($isRegistered == 0)
             return "REGISTRATION_PENDING";

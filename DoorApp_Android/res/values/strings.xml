@@ -13,6 +13,7 @@
     <string name="AbortButtonTitle">Abort</string>
     <string name="FrontDoorTitle">Open the front door</string>
     <string name="FlatDoorTitle">Open the flat door</string>
+    <string name="LetInTitle">Let Someone In</string>
     <string name="DoorCode">Authentification code:</string>
     <string name="StatusNotAuthenticated">"Status: Not Authenticated"</string>
     <string name="StatusAuthenticating">Status: Connecting</string>

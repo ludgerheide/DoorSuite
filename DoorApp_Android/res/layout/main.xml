@@ -16,7 +16,7 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical">
+            android:layout_gravity="left|center_vertical" android:visibility="gone">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:layout_gravity="left|center_vertical"
             android:onClick="process"
             android:textSize="30dp"
-            android:enabled="true"/>
+            android:enabled="true" android:visibility="gone"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             android:id="@+id/tvFlatDoor"
             android:layout_gravity="center"
             android:textColor="#ff0000"
-            android:textSize="25dp"/>
+            android:textSize="25dp" android:visibility="gone"/>
 
     <ProgressBar
             android:layout_width="fill_parent"
@@ -93,6 +93,10 @@
             android:gravity="center"
             android:textSize="25dp"
             android:textColor="#ff0000"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:text="@string/LetInTitle" android:id="@+id/buLetIn"
+            android:layout_gravity="left|center_vertical" android:textSize="30dp" android:enabled="true"
+            android:onClick="process"/>
 
 </LinearLayout>
 

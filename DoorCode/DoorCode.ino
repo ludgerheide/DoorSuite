@@ -230,7 +230,7 @@ void loop() {
     inByte = Serial.read();
     //We need to ignore bytes if we are on cooldown
     if(!serialOnCooldown) {
-      if(inByte == 97) {
+      if(inByte == 97) { //a
         Serial.println("200 AuthOn serial");
         if(authenticated)
           deauthenticate();
@@ -239,14 +239,14 @@ void loop() {
         serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
         serialOnCooldown = true;
       }
-      if(inByte == 98) {
+      if(inByte == 98) { //b
         Serial.readBytesUntil(0x76, receivedCodeBuffer, 4);
         flatBuzzerOn();
         //Set cooldown on and start the timer
         serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
         serialOnCooldown = true;
       }
-      if(inByte == 99) {
+      if(inByte == 99) { //c
         //We are turning off until we receive 100 ('d')
         Serial.println("Going offline");
         deauthenticate(); 
@@ -259,16 +259,28 @@ void loop() {
         delay(1000);
         displaySerial.print('v');                
       }
-      if(inByte == 101) {   
+      if(inByte == 101) { //d   
         Serial.println("Muting...");     
         muted = true;
         digitalWrite(OUT_SILENTPIN, GROUND_ON);
       }
-      if(inByte == 102) {
+      if(inByte == 102) { //e
         Serial.println("Unmuting...");
         muted = false;
         digitalWrite(OUT_SILENTPIN, GROUND_OFF);
-      }        
+      } 
+      if(inByte == 103) { //f
+        Serial.println("202 Authenticating and opening once");
+        if(authenticated)
+          deauthenticate();
+        authenticate();
+        //Set cooldown on and start the timer
+        serialCooldown = t_serialCooldown.after(SERIALCOOLDOWN, enableSerial);
+        serialOnCooldown = true;
+        //Simulate ringing the front bell
+        frontBellRinging = true;
+      } 
+      
     }
   }
 

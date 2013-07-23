@@ -29,6 +29,7 @@ final class CommonStuff {
     static final String UndefinedSSID = "Undefined_SSID";
 
     static final String FlatDoor = "FlatDoor";
+    static final String LetIn = "LetIn";
     static final String FrontDoor = "FrontDoor";
 
     static final String AuthenticatorReturnCode = "AuthRetCod";
