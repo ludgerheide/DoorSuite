@@ -84,7 +84,7 @@ function tryAuth($udid, $hashedSecret, $deviceName, $clientVersion, $doorToOpen,
                 } else
                     return "FAIL " . $read;
             } else if ($doorToOpen == "LetIn") {
-                $serial->sendMessage('f');
+                $serial->sendMessage('g');
                 //Read out the stuff
                 $read = $serial->readPort();
                 // If you want to change the configuration, the device must be closed

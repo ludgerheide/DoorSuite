@@ -251,7 +251,7 @@ void loop() {
         Serial.println("Going offline");
         deauthenticate(); 
         displaySerial.print("OFF");
-        while(inByte != 100) {
+        while(inByte != 100) { //d
           inByte = Serial.read();
         }
         displaySerial.print('v'); 
@@ -259,17 +259,17 @@ void loop() {
         delay(1000);
         displaySerial.print('v');                
       }
-      if(inByte == 101) { //d   
+      if(inByte == 101) { //e   
         Serial.println("Muting...");     
         muted = true;
         digitalWrite(OUT_SILENTPIN, GROUND_ON);
       }
-      if(inByte == 102) { //e
+      if(inByte == 102) { //f
         Serial.println("Unmuting...");
         muted = false;
         digitalWrite(OUT_SILENTPIN, GROUND_OFF);
       } 
-      if(inByte == 103) { //f
+      if(inByte == 103) { //g
         Serial.println("202 Authenticating and opening once");
         if(authenticated)
           deauthenticate();
